@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pi-desktop/protocol": ["packages/protocol/src/index.ts"],
+      "@pi-desktop/protocol/*": ["packages/protocol/src/*"]
+    },
+    "types": ["vite/client", "bun"]
+  },
+  "include": [
+    "src",
+    "packages",
+    "sidecar/src",
+    "scripts",
+    "vite.config.ts"
+  ]
+}
