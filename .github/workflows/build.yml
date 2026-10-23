@@ -84,6 +84,11 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tauriScript: bun run tauri
+          # An empty tagName keeps workflow_dispatch/PR runs artifact-only; a v* tag
+          # publishes a release with the signed bundles and latest.json.
+          tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+          releaseName: rpcdesk ${{ github.ref_name }}
+          releaseDraft: false
           includeUpdaterJson: true
           args: --target ${{ matrix.target }}
 
