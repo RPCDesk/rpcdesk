@@ -30,7 +30,8 @@ omp --mode rpc   or   pi --mode rpc
 Frames are small JSON objects. Host → sidecar: `prompt`, `abort`, `set_model`, `set_thinking`, `set_approval_mode`, `fork`, `list_sessions`, `dialog_response`, `composer_text`, `shutdown`. Sidecar → host: `ready`, `response`, `event`, `dialog`, `notify`, `status`, `title`, `composer`, `diff`, `fatal`, `exit`.
 
 Working notes for the next contributor (current state, gotchas, open work) live in
-[HANDOFF.md](HANDOFF.md).
+[HANDOFF.md](HANDOFF.md). Agents editing this repository should start from [AGENTS.md](AGENTS.md);
+built-in project skills live in `.omp/skills/` (`pi-desktop-feature`, `pi-desktop-release`).
 
 ## Development
 

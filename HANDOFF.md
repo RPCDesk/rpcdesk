@@ -27,6 +27,8 @@ Repository root: `~/Documents/Projects/pi-desktop` (macOS host).
 | `docs/updates.md` | Update modes, feed format, signing, per-platform behavior |
 | `docs/vms.md` | Local test VMs, build commands, guest-specific gotchas |
 | `CONTEXT.md` | Domain vocabulary — read before renaming anything |
+| `AGENTS.md` | Rules for AI agents editing this repo (loaded automatically as a context file) |
+| `.omp/skills/` | Built-in project skills: `pi-desktop-feature` (change procedure), `pi-desktop-release` (build/sign/publish) |
 
 ## Current state
 
@@ -52,6 +54,20 @@ Version `0.1.0` in `package.json` and `src-tauri/tauri.conf.json` (they must sta
 - Plugin UI runs unsandboxed in the main webview (CSP allows `eval` for transpiled plugin UI). A worker/iframe sandbox is unbuilt.
 - Windows builds here target `x86_64-pc-windows-msvc`; the ARM64-targeting MSVC toolset could not be installed on the ARM VM (details in `docs/vms.md`).
 - No provider credentials in the test VMs, so sessions stop with “No default model selected” — expected, not a bug.
+
+## Agent tooling in the repo
+
+`AGENTS.md` is the always-loaded rulebook. Two project skills ship in `.omp/skills/` and are
+discovered whenever an agent runs inside the repository (verified by resolving
+`skill://pi-desktop-feature` and `skill://pi-desktop-release` from a session at the repo root):
+
+- `pi-desktop-feature` — where a change belongs, how to extend the frame protocol on both
+  sides, what to test, how to run and verify, and the common failure modes.
+- `pi-desktop-release` — version bump, signed build, feed publishing, per-OS builds, and how to
+  prove an update actually installs.
+
+Keep both in sync when the build or protocol procedure changes; they are the agent-facing copy
+of `docs/updates.md` and `docs/vms.md`.
 
 ## Commands
 
