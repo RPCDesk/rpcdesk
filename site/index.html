@@ -52,7 +52,7 @@
             signed updates. Your models, credentials, and tools stay where they already live.
           </p>
           <div class="cta">
-            <a class="button primary" href="#install">Install</a>
+            <a class="button primary" href="https://github.com/RPCDesk/rpcdesk/releases/latest" rel="noreferrer">Download v0.1.0</a>
             <a class="button" href="https://github.com/RPCDesk/rpcdesk" rel="noreferrer">Read the source</a>
           </div>
           <dl class="stats">
@@ -156,9 +156,15 @@
         <div>
           <h2>Install</h2>
           <p class="section-lede">
-            Signed bundles for macOS (arm64), Debian/Ubuntu and AppImage (arm64 today),
-            and Windows (x64). Build from source if you want the latest commit.
+            Every release ships for macOS arm64 and x64, Linux x64 (AppImage, deb, rpm), and
+            Windows x64. Bundles are signed for the updater; Apple and Windows code-signing
+            certificates are not configured yet, so expect a Gatekeeper/SmartScreen prompt.
           </p>
+          <div class="downloads">
+            <a class="button" href="https://github.com/RPCDesk/rpcdesk/releases/latest" rel="noreferrer">macOS dmg</a>
+            <a class="button" href="https://github.com/RPCDesk/rpcdesk/releases/latest" rel="noreferrer">Windows setup</a>
+            <a class="button" href="https://github.com/RPCDesk/rpcdesk/releases/latest" rel="noreferrer">Linux AppImage / deb / rpm</a>
+          </div>
           <pre class="code"><code><span class="c"># from source (Bun + Rust)</span>
 git clone https://github.com/RPCDesk/rpcdesk
 cd rpcdesk

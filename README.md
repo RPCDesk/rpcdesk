@@ -1,6 +1,8 @@
 # rpcdesk
 
-**Site:** [rpcdesk.ayushb.com](https://rpcdesk.ayushb.com) · **Source:** [github.com/RPCDesk/rpcdesk](https://github.com/RPCDesk/rpcdesk)
+**Site:** [rpcdesk.ayushb.com](https://rpcdesk.ayushb.com) · **Source:** [github.com/RPCDesk/rpcdesk](https://github.com/RPCDesk/rpcdesk) · **Releases:** [latest](https://github.com/RPCDesk/rpcdesk/releases/latest)
+
+[![Build desktop bundles](https://github.com/RPCDesk/rpcdesk/actions/workflows/build.yml/badge.svg)](https://github.com/RPCDesk/rpcdesk/actions/workflows/build.yml)
 
 A macOS, Windows, and Linux desktop front-end for the [pi](https://pi.dev) and [omp](https://omp.sh) coding-agent harnesses. Each tab owns one persisted agent session, rendered as a chat transcript with streaming text, thinking, tool cards, diffs, approvals, and session resume.
 
