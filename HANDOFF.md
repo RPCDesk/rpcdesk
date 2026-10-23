@@ -14,6 +14,14 @@ credentials, tools, sessions, and policy stay with the CLIs.
 
 Repository root: `~/Documents/Projects/rpcdesk` (macOS host).
 
+## Repository map
+
+| Repo | Contents |
+| --- | --- |
+| `RPCDesk/rpcdesk` | This app: Tauri shell, React UI, Bun sidecar, docs, releases |
+| `RPCDesk/website` | Static site; pushes to `main` deploy to Cloudflare Pages |
+| `RPCDesk/issues` | Public tracker with the issue forms |
+
 ## Where things live
 
 | Path | What it is |

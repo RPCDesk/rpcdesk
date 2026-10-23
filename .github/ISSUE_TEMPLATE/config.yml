@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Bug report, feature request, or question
+    url: https://github.com/RPCDesk/issues/issues/new/choose
+    about: Issues are tracked in RPCDesk/issues, with forms that ask for logs and versions.
+  - name: Security report
+    url: https://github.com/RPCDesk/rpcdesk/security/advisories/new
+    about: Report a vulnerability privately. Never open a public issue for one.
+  - name: Website
+    url: https://rpcdesk.ayushb.com
+    about: Screenshots and download links.

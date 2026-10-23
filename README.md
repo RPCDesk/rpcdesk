@@ -10,11 +10,15 @@ rpcdesk is a thin shell around the installed CLIs, not a replacement for them. M
 
 rpcdesk prefers an installed `omp` or `pi` and only offers to download an official standalone build when neither is found. Managed downloads cover omp 18.12.6 and pi 1.4.0 on macOS, Linux, and Windows (arm64 and x64). CI currently produces macOS arm64/x64, Linux x64, and Windows x64 bundles; the runtime resolver also supports arm64 Linux and Windows. The app bundle is ~45 MB on disk (32 MB dmg), not ~1 GB: the SDK dependency trees are no longer embedded.
 
-## Site
+## Related repositories
 
-`site/` is the static landing page (plain HTML/CSS, no build step). Deploy with
-`bun run deploy:site`; the Cloudflare Pages project is `rpcdesk`, so it publishes to
-`rpcdesk.pages.dev` and the custom domain `rpcdesk.ayushb.com`.
+| Repository | Purpose |
+| --- | --- |
+| [RPCDesk/website](https://github.com/RPCDesk/website) | The static site (`rpcdesk.ayushb.com`), deployed to Cloudflare Pages on push |
+| [RPCDesk/issues](https://github.com/RPCDesk/issues) | Public issue tracker — bugs, feature requests, questions |
+
+Security problems go through this repository's
+[Security tab](https://github.com/RPCDesk/rpcdesk/security/advisories/new), never a public issue.
 
 ## Architecture
 
