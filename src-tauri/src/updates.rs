@@ -54,20 +54,51 @@ fn settings_endpoint() -> Option<String> {
 }
 
 /// Resolution order: explicit argument, environment, user settings.
-pub fn resolve_endpoints(explicit: Option<&str>) -> Vec<String> {
-    if let Some(raw) = explicit {
-        let endpoints = parse_endpoints(raw);
-        if !endpoints.is_empty() {
-            return endpoints;
+/// Endpoints compiled into `tauri.conf.json` (`plugins.updater.endpoints`).
+pub fn config_endpoints(app: &AppHandle) -> Vec<String> {
+    app.config()
+        .plugins
+        .0
+        .get("updater")
+        .and_then(|config| config.get("endpoints"))
+        .and_then(|value| value.as_array())
+        .map(|items| {
+            items
+                .iter()
+                .filter_map(|item| item.as_str())
+                .map(str::to_string)
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// Precedence for update feeds: argument, environment, user settings, shipped config.
+///
+/// Pure so it can be tested without an app handle; the first non-empty source wins and a
+/// malformed value falls through to the next one instead of disabling updates.
+pub fn pick_endpoints(
+    explicit: Option<&str>,
+    env: Option<&str>,
+    settings: Option<&str>,
+    config: &[String],
+) -> Vec<String> {
+    for candidate in [explicit, env, settings] {
+        if let Some(raw) = candidate {
+            let parsed = parse_endpoints(raw);
+            if !parsed.is_empty() {
+                return parsed;
+            }
         }
     }
-    if let Ok(raw) = std::env::var("RPCDESK_UPDATE_ENDPOINT") {
-        let endpoints = parse_endpoints(&raw);
-        if !endpoints.is_empty() {
-            return endpoints;
-        }
-    }
-    settings_endpoint().into_iter().collect()
+    config.to_vec()
+}
+
+/// Resolves the feed for a running app.
+pub fn resolve_endpoints(app: &AppHandle, explicit: Option<&str>) -> Vec<String> {
+    let env = std::env::var("RPCDESK_UPDATE_ENDPOINT").ok();
+    let settings = settings_endpoint();
+    let config = config_endpoints(app);
+    pick_endpoints(explicit, env.as_deref(), settings.as_deref(), &config)
 }
 
 fn build_updater(
@@ -75,7 +106,7 @@ fn build_updater(
     explicit: Option<&str>,
 ) -> Result<tauri_plugin_updater::Updater, String> {
     let mut builder = app.updater_builder();
-    let endpoints = resolve_endpoints(explicit);
+    let endpoints = resolve_endpoints(app, explicit);
     if endpoints.is_empty() {
         return Err(
             "No update feed configured. Set an update feed URL in Settings → Updates.".into(),
@@ -99,8 +130,8 @@ fn build_updater(
 
 /// True when an update feed is configured through settings or the environment.
 #[tauri::command]
-pub fn update_feed_configured() -> bool {
-    !resolve_endpoints(None).is_empty()
+pub fn update_feed_configured(app: AppHandle) -> bool {
+    !resolve_endpoints(&app, None).is_empty()
 }
 
 #[tauri::command]
@@ -108,7 +139,7 @@ pub async fn check_update(
     app: AppHandle,
     endpoint: Option<String>,
 ) -> Result<Option<UpdateInfo>, String> {
-    let resolved = resolve_endpoints(endpoint.as_deref());
+    let resolved = resolve_endpoints(&app, endpoint.as_deref());
     let updater = match build_updater(&app, endpoint.as_deref()) {
         Ok(updater) => updater,
         Err(error) => {
@@ -219,8 +250,25 @@ mod tests {
     #[test]
     fn prefers_the_explicit_endpoint() {
         assert_eq!(
-            resolve_endpoints(Some("https://explicit.example/latest.json")),
+            pick_endpoints(
+                Some("https://explicit.example/latest.json"),
+                Some("https://env.example/latest.json"),
+                Some("https://settings.example/latest.json"),
+                &["https://config.example/latest.json".to_string()],
+            ),
             vec!["https://explicit.example/latest.json".to_string()]
+        );
+    }
+
+    #[test]
+    fn falls_back_to_the_shipped_endpoint() {
+        let config = vec!["https://github.com/RPCDesk/rpcdesk/releases/latest/download/latest.json".to_string()];
+        assert_eq!(pick_endpoints(None, None, None, &config), config);
+        // A malformed override must not disable the shipped feed.
+        assert_eq!(pick_endpoints(Some("nonsense"), None, None, &config), config);
+        assert_eq!(
+            pick_endpoints(None, None, Some("https://settings.example/latest.json"), &config),
+            vec!["https://settings.example/latest.json".to_string()]
         );
     }
 }
