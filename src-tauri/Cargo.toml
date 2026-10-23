@@ -1,6 +1,6 @@
 [package]
 name = "rpcdesk"
-version = "0.1.0"
+version = "0.1.1"
 description = "rpcdesk"
 authors = ["aaxyat"]
 edition = "2021"
