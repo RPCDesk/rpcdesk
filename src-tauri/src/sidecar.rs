@@ -130,7 +130,7 @@ fn inflate_bun(gz: &Path, bun_name: &str) -> Result<PathBuf, String> {
 
 pub(crate) fn resolve_bun(app: &AppHandle) -> Result<PathBuf, String> {
     let bun_name = if cfg!(windows) { "bun.exe" } else { "bun" };
-    if let Some(path) = std::env::var_os("PI_DESKTOP_BUN") {
+    if let Some(path) = std::env::var_os("RPCDESK_BUN") {
         let path = PathBuf::from(path);
         if path.is_file() {
             return Ok(path);
@@ -391,7 +391,7 @@ pub async fn start_session(
         .env("PATH", login_path())
         .env("HOME", crate::paths::home_dir())
         .env("USERPROFILE", crate::paths::home_dir())
-        .env("PI_DESKTOP_TAB", &tab_id);
+        .env("RPCDESK_TAB", &tab_id);
 
     if let Some(session) = options
         .session

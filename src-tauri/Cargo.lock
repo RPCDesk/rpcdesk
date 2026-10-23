@@ -2778,29 +2778,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pi-desktop"
-version = "0.1.0"
-dependencies = [
- "flate2",
- "futures-util",
- "libc",
- "notify",
- "regex",
- "reqwest",
- "serde",
- "serde_json",
- "sha2",
- "tar",
- "tauri",
- "tauri-build",
- "tauri-plugin-dialog",
- "tauri-plugin-opener",
- "tauri-plugin-updater",
- "tokio",
- "zip 2.6.1",
-]
-
-[[package]]
 name = "pin-project-lite"
 version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3143,6 +3120,29 @@ dependencies = [
  "libc",
  "untrusted",
  "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "rpcdesk"
+version = "0.1.0"
+dependencies = [
+ "flate2",
+ "futures-util",
+ "libc",
+ "notify",
+ "regex",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tar",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-dialog",
+ "tauri-plugin-opener",
+ "tauri-plugin-updater",
+ "tokio",
+ "zip 2.6.1",
 ]
 
 [[package]]

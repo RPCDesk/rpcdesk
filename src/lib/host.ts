@@ -4,7 +4,7 @@ import {
   type HostFrame,
   type SidecarFrame,
   type ThinkingLevel,
-} from "@pi-desktop/protocol";
+} from "@rpcdesk/protocol";
 import { call } from "./tauri";
 import { useSettings } from "../state/settings";
 import { useRuntime } from "../state/runtime";

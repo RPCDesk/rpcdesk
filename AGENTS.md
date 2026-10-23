@@ -1,4 +1,4 @@
-# AGENTS.md — editing Pi Desktop
+# AGENTS.md — editing rpcdesk
 
 Instructions for AI agents working in this repository. Read `CONTEXT.md` (vocabulary) and
 `HANDOFF.md` (current state, open work) first; they outrank memory and guesswork.
@@ -15,7 +15,7 @@ Instructions for AI agents working in this repository. Read `CONTEXT.md` (vocabu
   matching test; a frame without a guard is a rejected frame at runtime.
 - Platform directories come from `src-tauri/src/paths.rs`. No `$HOME` string concatenation.
 - Version lives in both `package.json` and `src-tauri/tauri.conf.json`; bump both together.
-- Never commit secrets. The updater private key stays in `~/.Secrets/pi-desktop/updater.key`;
+- Never commit secrets. The updater private key stays in `~/.Secrets/rpcdesk/updater.key`;
   the public key in `src-tauri/tauri.conf.json` is public by design.
 
 ## Verify, don't assume
@@ -65,7 +65,7 @@ extend `sidecar/src/backends/`, add the runtime row in `src-tauri/src/runtime.rs
 `src/state/runtime.ts` about it. Update `CONTEXT.md` if vocabulary changes.
 
 **Plugin surface:** host API types in `src/plugins/api.ts`, registration in
-`src/plugins/host.ts`, user plugins in `~/.pi-desktop/plugins` (never project-level). Plugin UI
+`src/plugins/host.ts`, user plugins in `~/.rpcdesk/plugins` (never project-level). Plugin UI
 runs unsandboxed — treat third-party plugin code as trusted only.
 
 **Settings:** add the field to `AppSettings` + `DEFAULT_SETTINGS` in `src/state/settings.ts`
@@ -91,5 +91,5 @@ doc update is incomplete.
 Project skills live in `.omp/skills/` and are discovered automatically when the agent runs
 inside this repository:
 
-- `pi-desktop-feature` — implement a feature or bug fix safely.
-- `pi-desktop-release` — build, sign, publish, and verify a release.
+- `rpcdesk-feature` — implement a feature or bug fix safely.
+- `rpcdesk-release` — build, sign, publish, and verify a release.

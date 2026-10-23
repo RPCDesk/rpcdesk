@@ -98,7 +98,7 @@ describe("createPiGate", () => {
     const run = harness(state, "Reject");
     expect(await run({ toolName: "bash", input: {} })).toEqual({
       block: true,
-      reason: "Rejected in Pi Desktop",
+      reason: "Rejected in rpcdesk",
     });
   });
 

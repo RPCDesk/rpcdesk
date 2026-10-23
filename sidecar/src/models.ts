@@ -1,4 +1,4 @@
-import type { ModelInfo } from "@pi-desktop/protocol";
+import type { ModelInfo } from "@rpcdesk/protocol";
 
 export interface ModelLike {
   provider?: string;

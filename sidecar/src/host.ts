@@ -1,4 +1,4 @@
-import type { HostFrame, SidecarFrame } from "@pi-desktop/protocol";
+import type { HostFrame, SidecarFrame } from "@rpcdesk/protocol";
 import type { AgentBackend } from "./backend";
 import { createDiffTracker } from "./diff";
 

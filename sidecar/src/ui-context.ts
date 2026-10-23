@@ -3,7 +3,7 @@ import type {
   DialogKind,
   HostFrame,
   SidecarFrame,
-} from "@pi-desktop/protocol";
+} from "@rpcdesk/protocol";
 
 export interface Timers {
   setTimeout(callback: () => void, ms: number): unknown;
@@ -182,7 +182,7 @@ export function createUiContext({
     },
     custom<T>(): Promise<T> {
       return Promise.reject(
-        new Error("Custom TUI components are not supported in Pi Desktop"),
+        new Error("Custom TUI components are not supported in rpcdesk"),
       );
     },
     pasteToEditor(text) {
@@ -216,7 +216,7 @@ export function createUiContext({
       return undefined;
     },
     setTheme() {
-      return { success: false, error: "Pi Desktop manages themes" };
+      return { success: false, error: "rpcdesk manages themes" };
     },
     getToolsExpanded() {
       return false;

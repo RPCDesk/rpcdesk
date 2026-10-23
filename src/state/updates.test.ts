@@ -26,7 +26,7 @@ describe("updateSummary", () => {
       "Not checked yet.",
     );
     expect(updateSummary("up-to-date", undefined, undefined, "1.0.0")).toBe(
-      "Pi Desktop 1.0.0 is up to date.",
+      "rpcdesk 1.0.0 is up to date.",
     );
     expect(
       updateSummary(

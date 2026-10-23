@@ -30,7 +30,7 @@ describe("plugin manifests", () => {
   });
 
   it("rejects an escaping entry", () => {
-    const directory = join(tmpdir(), "pi-desktop-plugin-root");
+    const directory = join(tmpdir(), "rpcdesk-plugin-root");
     expect(() => resolvePluginEntry(directory, "../escape.ts")).toThrow(
       "escapes",
     );
@@ -39,7 +39,7 @@ describe("plugin manifests", () => {
 
 describe("loadAgentExtensions", () => {
   it("loads an enabled agent plugin and skips a disabled one", async () => {
-    const root = await mkdtemp(join(tmpdir(), "pi-desktop-plugins-"));
+    const root = await mkdtemp(join(tmpdir(), "rpcdesk-plugins-"));
     const plugins = join(root, "plugins");
     await mkdir(join(plugins, "hello"), { recursive: true });
     await mkdir(join(plugins, "off"), { recursive: true });

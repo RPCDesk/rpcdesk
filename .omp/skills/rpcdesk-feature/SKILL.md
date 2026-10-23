@@ -1,9 +1,9 @@
 ---
-name: pi-desktop-feature
-description: Implement a feature, behavior change, or bug fix in the Pi Desktop app (Tauri host + React UI + Bun sidecar). Use when asked to add or change anything in this repository — a frame, a command, a panel, a store, a backend behavior, or a runtime/update tweak — so the change lands on both sides of the protocol and is verified by running the app, not only by tests.
+name: rpcdesk-feature
+description: Implement a feature, behavior change, or bug fix in the rpcdesk app (Tauri host + React UI + Bun sidecar). Use when asked to add or change anything in this repository — a frame, a command, a panel, a store, a backend behavior, or a runtime/update tweak — so the change lands on both sides of the protocol and is verified by running the app, not only by tests.
 ---
 
-# Editing Pi Desktop
+# Editing rpcdesk
 
 Read `AGENTS.md` and `HANDOFF.md` at the repository root first. This skill is the working
 procedure; those files hold the invariants and the current state.
@@ -68,13 +68,13 @@ Tests are not proof. Exercise the changed surface in a real build:
 bun run dev:web        # terminal 1
 bun run tauri dev      # terminal 2, uses the dev server
 # or
-bun run build:app && open "src-tauri/target/release/bundle/macos/Pi Desktop.app"
+bun run build:app && open "src-tauri/target/release/bundle/macos/rpcdesk.app"
 ```
 
 Check the logs when behavior is unclear:
 
-- `~/Library/Logs/Pi Desktop/sidecar-<tab>.log` (CLI stderr per tab)
-- `~/Library/Logs/Pi Desktop/updates.log` (update attempts)
+- `~/Library/Logs/rpcdesk/sidecar-<tab>.log` (CLI stderr per tab)
+- `~/Library/Logs/rpcdesk/updates.log` (update attempts)
 - Windows/Linux: the same files inside the app-support `logs` folder.
 
 The test VMs have no provider credentials, so sessions stop at “No default model selected” —

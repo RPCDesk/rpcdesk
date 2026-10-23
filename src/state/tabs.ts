@@ -5,7 +5,7 @@ import type {
   SessionInfo,
   SessionSnapshot,
   SidecarFrame,
-} from "@pi-desktop/protocol";
+} from "@rpcdesk/protocol";
 import { emitPluginEvent } from "../plugins/runtime";
 import { useSettings } from "./settings";
 import { useUi } from "./ui";

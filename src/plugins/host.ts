@@ -1,7 +1,7 @@
 import * as React from "react";
 import { create } from "zustand";
 import type { ComponentType } from "react";
-import type { SessionSnapshot } from "@pi-desktop/protocol";
+import type { SessionSnapshot } from "@rpcdesk/protocol";
 import { call } from "../lib/tauri";
 import { sendPrompt } from "../lib/host";
 import { useThemes, type ThemeDefinition } from "../themes";

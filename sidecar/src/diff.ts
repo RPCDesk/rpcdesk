@@ -1,7 +1,7 @@
 import { createTwoFilesPatch } from "diff";
 import { readFileSync, statSync } from "node:fs";
 import { relative, resolve } from "node:path";
-import type { SidecarFrame } from "@pi-desktop/protocol";
+import type { SidecarFrame } from "@rpcdesk/protocol";
 
 const MAX_DIFF_BYTES = 2 * 1024 * 1024;
 

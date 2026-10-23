@@ -43,7 +43,7 @@ pub fn run() {
             user_files::create_example_plugin,
         ])
         .build(tauri::generate_context!())
-        .expect("error while building Pi Desktop")
+        .expect("error while building rpcdesk")
         .run(|app, event| {
             if matches!(
                 event,

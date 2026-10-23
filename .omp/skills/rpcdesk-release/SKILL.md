@@ -1,9 +1,9 @@
 ---
-name: pi-desktop-release
-description: Build, sign, publish, and verify a Pi Desktop release, including its self-update feed. Use when cutting a version, producing installers (macOS, Linux deb/rpm/AppImage, Windows NSIS), publishing updates, or diagnosing a release that fails to build, bundle, or install itself.
+name: rpcdesk-release
+description: Build, sign, publish, and verify a rpcdesk release, including its self-update feed. Use when cutting a version, producing installers (macOS, Linux deb/rpm/AppImage, Windows NSIS), publishing updates, or diagnosing a release that fails to build, bundle, or install itself.
 ---
 
-# Releasing Pi Desktop
+# Releasing rpcdesk
 
 Read `HANDOFF.md` for current state and `docs/updates.md` for the feed format.
 
@@ -30,8 +30,8 @@ cargo test --manifest-path src-tauri/Cargo.toml
 bun run build:app
 ```
 
-`scripts/build-app.ts` uses `~/.Secrets/pi-desktop/updater.key` when present (override path with
-`PI_DESKTOP_SIGNING_KEY`) and signs `*.tar.gz`/`.nsis.zip` updater artifacts. Without a key the
+`scripts/build-app.ts` uses `~/.Secrets/rpcdesk/updater.key` when present (override path with
+`RPCDESK_SIGNING_KEY`) and signs `*.tar.gz`/`.nsis.zip` updater artifacts. Without a key the
 build still succeeds, with updater artifacts disabled — fine for local testing, useless for a
 release. Bump the version before building; the manifest relies on it.
 
@@ -42,7 +42,7 @@ Artifacts land in `src-tauri/target/release/bundle/<kind>/`.
 ```sh
 bun run publish:update --version X.Y.Z --target <target> \
   --artifact "<path to .app | .AppImage | setup.exe>" \
-  --base-url https://example.com/pi-desktop --feed dist-updates --notes "…"
+  --base-url https://example.com/rpcdesk --feed dist-updates --notes "…"
 ```
 
 Targets: `darwin-aarch64`, `darwin-x86_64`, `linux-x86_64`, `windows-x86_64` (use the platform
@@ -63,11 +63,11 @@ Cross-builds prove nothing. Use the VMs documented in `docs/vms.md`:
 ```sh
 # Linux (Debian arm64)
 ssh -i ~/.ssh/pi_vm_ed25519 pi@10.211.55.3
-cd ~/pi-desktop && sudo rm -rf /tmp/* && \
+cd ~/rpcdesk && sudo rm -rf /tmp/* && \
   PATH="$HOME/.bun/bin:$HOME/.cargo/bin:$PATH" bun run tauri build --bundles deb,rpm,appimage
 
 # Windows (x64 build on the arm64 guest)
-prlctl exec pi-windows --user pi --password pi cmd /c "call \"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat\" arm64_x64 >nul && cd /d %USERPROFILE%\pi-desktop && set PATH=%USERPROFILE%\.bun\bin;%USERPROFILE%\.cargo\bin;%PATH% && set \"RUSTUP_TOOLCHAIN=stable-x86_64-pc-windows-msvc\" && bun run tauri build --target x86_64-pc-windows-msvc --bundles nsis"
+prlctl exec pi-windows --user pi --password pi cmd /c "call \"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat\" arm64_x64 >nul && cd /d %USERPROFILE%\rpcdesk && set PATH=%USERPROFILE%\.bun\bin;%USERPROFILE%\.cargo\bin;%PATH% && set \"RUSTUP_TOOLCHAIN=stable-x86_64-pc-windows-msvc\" && bun run tauri build --target x86_64-pc-windows-msvc --bundles nsis"
 ```
 
 Windows guests need `RUSTUP_TOOLCHAIN` quoted (`set "VAR=value"`); a trailing space breaks rustup.

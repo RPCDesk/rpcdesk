@@ -8,7 +8,7 @@ import {
   Puzzle,
   MessageSquare,
 } from "lucide-react";
-import type { Backend } from "@pi-desktop/protocol";
+import type { Backend } from "@rpcdesk/protocol";
 import { useTabs } from "../state/tabs";
 import { useUi } from "../state/ui";
 import { useSettings } from "../state/settings";
@@ -52,10 +52,10 @@ export function Sidebar() {
   return (
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-[var(--border)] bg-[var(--surface)] max-[900px]:w-[220px]">
       <div className="flex items-center gap-2 px-4 pb-2 pt-3">
-        <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-[var(--fg)] text-[12px] font-semibold text-[var(--bg)]">
-          π
+        <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-[var(--fg)] font-mono text-[11px] font-semibold tracking-[-0.05em] text-[var(--bg)]">
+          ›_
         </div>
-        <div className="text-[13px] font-semibold">Pi Desktop</div>
+        <div className="text-[13px] font-semibold">rpcdesk</div>
         <button
           type="button"
           className="ml-auto rounded-full p-1.5 text-[var(--muted)] transition-colors hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"

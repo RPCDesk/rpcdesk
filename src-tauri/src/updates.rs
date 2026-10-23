@@ -61,7 +61,7 @@ pub fn resolve_endpoints(explicit: Option<&str>) -> Vec<String> {
             return endpoints;
         }
     }
-    if let Ok(raw) = std::env::var("PI_DESKTOP_UPDATE_ENDPOINT") {
+    if let Ok(raw) = std::env::var("RPCDESK_UPDATE_ENDPOINT") {
         let endpoints = parse_endpoints(&raw);
         if !endpoints.is_empty() {
             return endpoints;

@@ -88,7 +88,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: pi-desktop-${{ matrix.target }}
+          name: rpcdesk-${{ matrix.target }}
           if-no-files-found: warn
           path: |
             src-tauri/target/**/release/bundle/**

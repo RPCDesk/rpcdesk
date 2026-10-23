@@ -26,15 +26,15 @@ describe("crc32", () => {
   it("matches known values", () => {
     expect(crc32(new TextEncoder().encode(""))).toBe(0);
     expect(crc32(new TextEncoder().encode("123456789"))).toBe(0xcbf43926);
-    expect(crc32(new TextEncoder().encode("pi-desktop"))).toBe(0x137d774c);
+    expect(crc32(new TextEncoder().encode("rpcdesk"))).toBe(0x1701e55a);
   });
 });
 
 describe("createStoredZip", () => {
   it("stores entries uncompressed and readable", () => {
     const payload = new TextEncoder().encode("installer bytes");
-    const archive = createStoredZip([{ name: "Pi Setup.exe", contents: payload }]);
-    const stored = readStoredEntry(archive, "Pi Setup.exe");
+    const archive = createStoredZip([{ name: "rpcdesk Setup.exe", contents: payload }]);
+    const stored = readStoredEntry(archive, "rpcdesk Setup.exe");
     expect(stored).toBeDefined();
     expect(new TextDecoder().decode(stored!)).toBe("installer bytes");
     expect(archive.length).toBeGreaterThan(payload.length);

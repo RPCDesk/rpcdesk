@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Default capability for the Pi Desktop window",
+  "description": "Default capability for the rpcdesk window",
   "windows": ["main"],
   "permissions": [
     "core:default",

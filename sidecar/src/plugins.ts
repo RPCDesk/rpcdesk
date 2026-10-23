@@ -87,7 +87,7 @@ async function enabledPlugins(pluginsDirectory: string): Promise<Record<string, 
 }
 
 export async function listAgentExtensionFiles({
-  pluginsDir = join(process.env.HOME ?? homedir(), ".pi-desktop/plugins"),
+  pluginsDir = join(process.env.HOME ?? homedir(), ".rpcdesk/plugins"),
   enabled,
 }: {
   pluginsDir?: string;
@@ -124,7 +124,7 @@ export async function listAgentExtensionFiles({
       loaded.push({ id: manifest.id, path: file });
     } catch (error) {
       console.error(
-        `Pi Desktop: failed to resolve agent plugin ${manifest.id}: ${(error as Error).message}`,
+        `rpcdesk: failed to resolve agent plugin ${manifest.id}: ${(error as Error).message}`,
       );
     }
   }
@@ -132,7 +132,7 @@ export async function listAgentExtensionFiles({
 }
 
 export async function loadAgentExtensions({
-  pluginsDir = join(process.env.HOME ?? homedir(), ".pi-desktop/plugins"),
+  pluginsDir = join(process.env.HOME ?? homedir(), ".rpcdesk/plugins"),
   enabled,
 }: {
   pluginsDir?: string;
@@ -178,7 +178,7 @@ export async function loadAgentExtensions({
       });
     } catch (error) {
       console.error(
-        `Pi Desktop: failed to load agent plugin ${manifest.id}: ${(error as Error).message}`,
+        `rpcdesk: failed to load agent plugin ${manifest.id}: ${(error as Error).message}`,
       );
     }
   }

@@ -65,9 +65,9 @@ async function main(): Promise<void> {
 
   const protocolTarget = join(
     destination,
-    "node_modules/@pi-desktop/protocol",
+    "node_modules/@rpcdesk/protocol",
   );
-  await mkdir(join(destination, "node_modules/@pi-desktop"), {
+  await mkdir(join(destination, "node_modules/@rpcdesk"), {
     recursive: true,
   });
   await cp(join(root, "packages/protocol"), protocolTarget, {
@@ -75,7 +75,7 @@ async function main(): Promise<void> {
   });
 
   console.log(
-    `Staged sidecar at ${destination}\nBun: ${bunBinary}\nBun payload: ${compressed.length} bytes (from ${bunBytes.length}) in bun.bin\nEmbedded packages: diff, @pi-desktop/protocol`,
+    `Staged sidecar at ${destination}\nBun: ${bunBinary}\nBun payload: ${compressed.length} bytes (from ${bunBytes.length}) in bun.bin\nEmbedded packages: diff, @rpcdesk/protocol`,
   );
 }
 

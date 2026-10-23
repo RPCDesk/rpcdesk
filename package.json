@@ -1,5 +1,5 @@
 {
-  "name": "pi-desktop",
+  "name": "rpcdesk",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -16,7 +16,8 @@
     "tauri": "tauri",
     "stage:sidecar": "bun scripts/stage-sidecar.ts",
     "build:app": "bun scripts/build-app.ts",
-    "publish:update": "bun scripts/publish-update.ts"
+    "publish:update": "bun scripts/publish-update.ts",
+    "deploy:site": "bunx wrangler@4 pages deploy site --project-name rpcdesk --branch main"
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.13.0",

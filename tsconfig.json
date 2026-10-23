@@ -18,8 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@pi-desktop/protocol": ["packages/protocol/src/index.ts"],
-      "@pi-desktop/protocol/*": ["packages/protocol/src/*"]
+      "@rpcdesk/protocol": ["packages/protocol/src/index.ts"],
+      "@rpcdesk/protocol/*": ["packages/protocol/src/*"]
     },
     "types": ["vite/client", "bun"]
   },

@@ -6,7 +6,7 @@ import { buildUiPlugin } from "./build-plugin";
 
 describe("buildUiPlugin", () => {
   it("transpiles classic JSX to React.createElement", async () => {
-    const root = await mkdtemp(join(tmpdir(), "pi-desktop-build-"));
+    const root = await mkdtemp(join(tmpdir(), "rpcdesk-build-"));
     await writeFile(
       join(root, "plugin.json"),
       JSON.stringify({ id: "hello", name: "Hello", version: "0.1.0", ui: "ui.tsx" }),
@@ -22,7 +22,7 @@ describe("buildUiPlugin", () => {
   });
 
   it("rejects ESM entries", async () => {
-    const root = await mkdtemp(join(tmpdir(), "pi-desktop-build-"));
+    const root = await mkdtemp(join(tmpdir(), "rpcdesk-build-"));
     await writeFile(
       join(root, "plugin.json"),
       JSON.stringify({ id: "hello", name: "Hello", version: "0.1.0", ui: "ui.tsx" }),

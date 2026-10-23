@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>rpcdesk — a desktop cockpit for coding-agent CLIs</title>
+    <meta
+      name="description"
+      content="rpcdesk runs omp and pi in RPC mode: one session per tab, approvals that follow your CLI policy, typed plugins, nine palettes, and signed self-updates."
+    />
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta property="og:title" content="rpcdesk" />
+    <meta
+      property="og:description"
+      content="A desktop cockpit for coding-agent CLIs."
+    />
+    <meta property="og:image" content="assets/welcome.jpg" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="rpcdesk home">
+        <span class="mark" aria-hidden="true">&rsaquo;_</span>
+        <span class="wordmark">rpcdesk</span>
+      </a>
+      <nav class="links" aria-label="Sections">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#themes">Themes</a>
+        <a href="#install">Install</a>
+        <a class="ghost" href="https://github.com/rpcdesk" rel="noreferrer">GitHub</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1" />
+        </svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" />
+        </svg>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">desktop app · macOS · Linux · Windows</p>
+          <h1>A desktop cockpit for coding-agent CLIs.</h1>
+          <p class="lede">
+            rpcdesk drives the real <code>omp</code> and <code>pi</code> binaries over RPC:
+            one session per tab, approvals that follow your CLI policy, typed plugins, and
+            signed updates. Your models, credentials, and tools stay where they already live.
+          </p>
+          <div class="cta">
+            <a class="button primary" href="#install">Install</a>
+            <a class="button" href="https://github.com/rpcdesk" rel="noreferrer">Read the source</a>
+          </div>
+          <dl class="stats">
+            <div><dt>Session model</dt><dd>one tab, one process</dd></div>
+            <div><dt>Transport</dt><dd>newline JSON over stdio</dd></div>
+            <div><dt>Bundle</dt><dd>~42 MB, no SDKs</dd></div>
+          </dl>
+        </div>
+        <figure class="shot hero-shot">
+          <img src="assets/welcome.jpg" alt="rpcdesk welcome screen in the dark theme" />
+        </figure>
+      </section>
+
+      <section id="how" class="section">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-index">01</span>
+            <h3>Pick a workspace</h3>
+            <p>
+              Each tab is bound to a directory. rpcdesk spawns a Bun sidecar that starts
+              <code>omp --mode rpc</code> or <code>pi --mode rpc</code> there.
+            </p>
+          </li>
+          <li>
+            <span class="step-index">02</span>
+            <h3>Watch the session</h3>
+            <p>
+              Records become typed frames: streamed text, thinking, tool cards with diffs,
+              approvals, and exit codes — all persisted for resume.
+            </p>
+          </li>
+          <li>
+            <span class="step-index">03</span>
+            <h3>Stay in control</h3>
+            <p>
+              Approval prompts carry the CLI's own policy. Kill, fork, or resume a session
+              without leaving the window.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="features" class="section">
+        <h2>Built for long sessions</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Sessions as tabs</h3>
+            <p>One process per tab, isolated state, crash recovery, and a sidebar that lists every saved session for the workspace.</p>
+          </article>
+          <article class="card">
+            <h3>Approvals that match the CLI</h3>
+            <p>Follow-CLI, always-ask, auto-write, or yolo. The status bar names the effective mode and where it came from.</p>
+          </article>
+          <article class="card">
+            <h3>Typed plugins</h3>
+            <p>Tool renderers, panels, commands, and themes in TypeScript, built by the same toolchain and loaded from your config directory.</p>
+          </article>
+          <article class="card">
+            <h3>Nine palettes</h3>
+            <p>System light/dark plus Graphite, Midnight, Aurora, Andromeda, Sand, and Mist — every palette contrast-checked.</p>
+          </article>
+          <article class="card">
+            <h3>Signed self-updates</h3>
+            <p>Manifests and artifacts are verified with minisign. Install and restart from the app; the log says exactly what happened.</p>
+          </article>
+          <article class="card">
+            <h3>Runtime management</h3>
+            <p>No CLI installed? rpcdesk can download the pinned <code>omp</code> or <code>pi</code> build and verify its SHA-256 first.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="themes" class="section">
+        <h2>Themes</h2>
+        <p class="section-lede">
+          One radius scale, layered surfaces, and palettes that keep text at 7:1 or better.
+          Pick from the appearance grid; the sun/moon button cycles system → light → dark.
+        </p>
+        <div class="theme-grid">
+          <figure class="shot">
+            <img src="assets/theme-graphite.jpg" alt="Graphite theme" loading="lazy" />
+            <figcaption>Graphite <span>violet accent</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/theme-andromeda.jpg" alt="Andromeda theme" loading="lazy" />
+            <figcaption>Andromeda <span>cyan accent</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/theme-sand.jpg" alt="Sand theme" loading="lazy" />
+            <figcaption>Sand <span>terracotta accent</span></figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/settings-light.jpg" alt="Light theme settings" loading="lazy" />
+            <figcaption>Light <span>native light</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="install" class="section install">
+        <div>
+          <h2>Install</h2>
+          <p class="section-lede">
+            Signed bundles for macOS (arm64), Debian/Ubuntu and AppImage (arm64 today),
+            and Windows (x64). Build from source if you want the latest commit.
+          </p>
+          <pre class="code"><code><span class="c"># from source (Bun + Rust)</span>
+git clone https://github.com/rpcdesk/rpcdesk
+cd rpcdesk
+bun install
+bun run build:app</code></pre>
+          <p class="fineprint">
+            The first launch extracts a bundled Bun runtime and uses your installed
+            <code>omp</code>/<code>pi</code>, or offers a verified download.
+          </p>
+        </div>
+        <div class="arch card">
+          <h3>Architecture</h3>
+          <div class="diagram" role="img" aria-label="React UI calls the Rust host, which supervises a Bun sidecar that speaks RPC to the omp or pi CLI.">
+            <div class="node">React UI</div>
+            <div class="arrow">invoke</div>
+            <div class="node">Rust host</div>
+            <div class="arrow">spawn</div>
+            <div class="node">Bun sidecar</div>
+            <div class="arrow">RPC</div>
+            <div class="node accent">omp / pi</div>
+          </div>
+          <p>
+            The app is a shell. Models, credentials, tools, and policy stay with the CLIs;
+            rpcdesk owns presentation and process lifetime.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="brand small">
+        <span class="mark" aria-hidden="true">&rsaquo;_</span>
+        <span>rpcdesk</span>
+      </div>
+      <p>MIT licensed. Built with Tauri, React, and Bun.</p>
+      <p class="fineprint">
+        <a href="https://github.com/rpcdesk">GitHub</a> ·
+        <a href="https://rpcdesk.pages.dev">rpcdesk.pages.dev</a>
+      </p>
+    </footer>
+
+    <script>
+      const root = document.documentElement;
+      const stored = localStorage.getItem("rpcdesk-theme");
+      if (stored) root.dataset.theme = stored;
+      document.querySelector(".theme-toggle").addEventListener("click", () => {
+        const next = root.dataset.theme === "light" ? "dark" : "light";
+        root.dataset.theme = next;
+        localStorage.setItem("rpcdesk-theme", next);
+      });
+    </script>
+  </body>
+</html>

@@ -457,7 +457,7 @@ pub fn create_example_plugin() -> Result<String, String> {
   "id": "hello-world",
   "name": "Hello World",
   "version": "0.1.0",
-  "description": "Example Pi Desktop plugin",
+  "description": "Example rpcdesk plugin",
   "ui": "ui.tsx",
   "agent": "agent.ts"
 }

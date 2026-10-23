@@ -24,8 +24,8 @@ export function UpdateBanner() {
       <div className="min-w-0">
         <span className="font-medium">
           {downloading
-            ? `Installing Pi Desktop ${info?.version ?? ""}`
-            : `Pi Desktop ${info?.version ?? "update"} is available`}
+            ? `Installing rpcdesk ${info?.version ?? ""}`
+            : `rpcdesk ${info?.version ?? "update"} is available`}
         </span>
         <span className="ml-2 text-[var(--muted)]">
           {downloading
@@ -90,7 +90,7 @@ export function UpdateSettings() {
         <input
           type="text"
           spellCheck={false}
-          placeholder="https://example.com/pi-desktop/latest.json"
+          placeholder="https://example.com/rpcdesk/latest.json"
           value={settings.updateEndpoint}
           onChange={(event) => update({ updateEndpoint: event.target.value })}
           className="w-[320px] rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 py-1 font-mono text-[10px] outline-none"
@@ -99,7 +99,7 @@ export function UpdateSettings() {
 
       <div className="flex items-start justify-between gap-4">
         <div className="text-[12px] text-[var(--muted)]">
-          Pi Desktop {currentVersion || "…"}
+          rpcdesk {currentVersion || "…"}
         </div>
         <div className="flex flex-col items-end gap-1">
           <div className="flex items-center gap-2">
@@ -134,7 +134,7 @@ export function UpdateSettings() {
       </div>
 
       <div className="text-[10px] leading-4 text-[var(--muted)]">
-        Checks use the feed URL, or <code className="font-mono">PI_DESKTOP_UPDATE_ENDPOINT</code>{" "}
+        Checks use the feed URL, or <code className="font-mono">RPCDESK_UPDATE_ENDPOINT</code>{" "}
         when the field is empty. Updates must be signed with the release key; macOS and
         Windows install in place, Linux only supports AppImage.
       </div>

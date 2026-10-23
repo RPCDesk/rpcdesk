@@ -2,7 +2,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import type { SidecarFrame } from "@pi-desktop/protocol";
+import type { SidecarFrame } from "@rpcdesk/protocol";
 import { computeDiff, createDiffTracker } from "./diff";
 
 describe("computeDiff", () => {
@@ -23,7 +23,7 @@ describe("computeDiff", () => {
 
 describe("createDiffTracker", () => {
   it("emits a diff after a tracked write", async () => {
-    const directory = await mkdtemp(join(tmpdir(), "pi-desktop-diff-"));
+    const directory = await mkdtemp(join(tmpdir(), "rpcdesk-diff-"));
     const file = join(directory, "a.txt");
     await writeFile(file, "old\n");
 

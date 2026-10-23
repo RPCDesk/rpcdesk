@@ -10,14 +10,14 @@ Local Parallels VMs used to exercise the Linux and Windows builds. They are deve
 | Resources | 2 vCPU, 3 GB RAM, 64 GB sparse disk, 4 GB swap |
 | User | `pi` / `pi`, LightDM autologin |
 | SSH | `ssh -i ~/.ssh/pi_vm_ed25519 pi@10.211.55.3` |
-| Repo | `~/pi-desktop` |
+| Repo | `~/rpcdesk` |
 | Toolchain | Bun 1.4.4, Rust 1.99.1 |
 | Installer | preseeded ISO built from `debian-13.7.0-arm64-netinst.iso` |
 
 Build and run:
 
 ```sh
-cd ~/pi-desktop
+cd ~/rpcdesk
 export PATH="$HOME/.bun/bin:$HOME/.cargo/bin:$PATH"
 bun install --frozen-lockfile
 bun run build:web && bun run stage:sidecar
@@ -26,10 +26,10 @@ bun run build:web && bun run stage:sidecar
 # run inside the X session (software rendering; the VM has no usable GPU)
 DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority XDG_RUNTIME_DIR=/run/user/1000 \
 LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 \
-dbus-run-session -- ~/pi-desktop/src-tauri/target/release/pi-desktop
+dbus-run-session -- ~/rpcdesk/src-tauri/target/release/rpcdesk
 ```
 
-A user unit (`~/.config/systemd/user/pi-desktop.service`) wraps the same command for `systemctl --user start pi-desktop`.
+A user unit (`~/.config/systemd/user/rpcdesk.service`) wraps the same command for `systemctl --user start rpcdesk`.
 
 The VM has no provider credentials. Sessions stop with “No default model selected” until an API key or model is configured, which is the expected CLI behaviour.
 
@@ -60,12 +60,12 @@ The guest user is a UAC-split administrator, so machine-wide installs must run t
 - Bun 1.4.4 (`irm https://bun.sh/install.ps1 | iex` as `pi`)
 - Rust 1.99.1 `aarch64-pc-windows-msvc` (`rustup-init.exe` as `pi`)
 - Visual Studio 2022 Build Tools with the C++ workload and Windows SDK (installed as SYSTEM, machine-wide)
-- Repo copy at `C:\Users\pi\pi-desktop`
+- Repo copy at `C:\Users\pi\rpcdesk`
 
 Build and run:
 
 ```sh
-prlctl exec pi-windows --user pi --password pi cmd /c "call \"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat\" arm64_x64 >nul && cd /d %USERPROFILE%\pi-desktop && set PATH=%USERPROFILE%\.bun\bin;%USERPROFILE%\.cargo\bin;%PATH% && set \"RUSTUP_TOOLCHAIN=stable-x86_64-pc-windows-msvc\" && bun run tauri build --target x86_64-pc-windows-msvc --bundles nsis"
+prlctl exec pi-windows --user pi --password pi cmd /c "call \"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvarsall.bat\" arm64_x64 >nul && cd /d %USERPROFILE%\rpcdesk && set PATH=%USERPROFILE%\.bun\bin;%USERPROFILE%\.cargo\bin;%PATH% && set \"RUSTUP_TOOLCHAIN=stable-x86_64-pc-windows-msvc\" && bun run tauri build --target x86_64-pc-windows-msvc --bundles nsis"
 ```
 
 Notes for this guest:
@@ -75,10 +75,10 @@ Notes for this guest:
 - Launch the built app in the interactive session with a scheduled task; `prlctl exec` runs in session 0 and cannot show a window:
 
 ```sh
-prlctl exec pi-windows --user pi --password pi cmd /c "schtasks /create /tn PiDesktop /tr \"%USERPROFILE%\pi-desktop\src-tauri\target\x86_64-pc-windows-msvc\release\pi-desktop.exe\" /sc once /st 23:59 /ru pi /it /f & schtasks /run /tn PiDesktop"
+prlctl exec pi-windows --user pi --password pi cmd /c "schtasks /create /tn PiDesktop /tr \"%USERPROFILE%\rpcdesk\src-tauri\target\x86_64-pc-windows-msvc\release\rpcdesk.exe\" /sc once /st 23:59 /ru pi /it /f & schtasks /run /tn PiDesktop"
 ```
 
-Verified in this VM: unit tests, release build, NSIS bundle, the app UI, `bun.bin` extraction to `%LOCALAPPDATA%\Pi Desktop\bin`, managed runtime resolution, an omp session whose stderr is surfaced in the app, and a real in-place update (installed 0.1.0 → 0.2.0 via the NSIS updater; the update log shows the feed, the found version, and the install).
+Verified in this VM: unit tests, release build, NSIS bundle, the app UI, `bun.bin` extraction to `%LOCALAPPDATA%\rpcdesk\bin`, managed runtime resolution, an omp session whose stderr is surfaced in the app, and a real in-place update (installed 0.1.0 → 0.2.0 via the NSIS updater; the update log shows the feed, the found version, and the install).
 
 Updater test flow used here: build the new version with `--config` pointing at a JSON file that sets `plugins.updater.dangerousInsecureTransportProtocol` (the local feed is plain HTTP), upload the installer to the host with `curl -F`, publish it with `bun run publish:update --target windows-x86_64`, and serve the feed from the host.
 

@@ -27,7 +27,7 @@ const WRITE_TOOLS = new Set([
 function gateConfig() {
   try {
     const value = JSON.parse(
-      readFileSync(process.env.PI_DESKTOP_GATE_CONFIG ?? "", "utf8"),
+      readFileSync(process.env.RPCDESK_GATE_CONFIG ?? "", "utf8"),
     );
     return {
       mode: typeof value.mode === "string" ? value.mode : "follow-cli",
@@ -78,6 +78,6 @@ export default function piDesktopGate(pi) {
       grants.add(grantKey);
       return undefined;
     }
-    return { block: true, reason: "Rejected in Pi Desktop" };
+    return { block: true, reason: "Rejected in rpcdesk" };
   });
 }

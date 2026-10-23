@@ -1,10 +1,18 @@
-# Pi Desktop
+# rpcdesk
+
+**Site:** [rpcdesk.ayushb.com](https://rpcdesk.ayushb.com) · **Source:** `github.com/rpcdesk/rpcdesk`
 
 A macOS, Windows, and Linux desktop front-end for the [pi](https://pi.dev) and [omp](https://omp.sh) coding-agent harnesses. Each tab owns one persisted agent session, rendered as a chat transcript with streaming text, thinking, tool cards, diffs, approvals, and session resume.
 
-Pi Desktop is a thin shell around the installed CLIs, not a replacement for them. Models, credentials, tools, sessions, and policy remain owned by pi/omp.
+rpcdesk is a thin shell around the installed CLIs, not a replacement for them. Models, credentials, tools, sessions, and policy remain owned by pi/omp.
 
-Pi Desktop prefers an installed `omp` or `pi` and only offers to download an official standalone build when neither is found. Managed downloads cover omp 18.12.6 and pi 1.4.0 on macOS, Linux, and Windows (arm64 and x64). CI currently produces macOS arm64/x64, Linux x64, and Windows x64 bundles; the runtime resolver also supports arm64 Linux and Windows. The app bundle is ~80 MB, not ~1 GB: the SDK dependency trees are no longer embedded.
+rpcdesk prefers an installed `omp` or `pi` and only offers to download an official standalone build when neither is found. Managed downloads cover omp 18.12.6 and pi 1.4.0 on macOS, Linux, and Windows (arm64 and x64). CI currently produces macOS arm64/x64, Linux x64, and Windows x64 bundles; the runtime resolver also supports arm64 Linux and Windows. The app bundle is ~45 MB on disk (32 MB dmg), not ~1 GB: the SDK dependency trees are no longer embedded.
+
+## Site
+
+`site/` is the static landing page (plain HTML/CSS, no build step). Deploy with
+`bun run deploy:site`; the Cloudflare Pages project is `rpcdesk`, so it publishes to
+`rpcdesk.pages.dev` and the custom domain `rpcdesk.ayushb.com`.
 
 ## Architecture
 
@@ -31,7 +39,7 @@ Frames are small JSON objects. Host → sidecar: `prompt`, `abort`, `set_model`,
 
 Working notes for the next contributor (current state, gotchas, open work) live in
 [HANDOFF.md](HANDOFF.md). Agents editing this repository should start from [AGENTS.md](AGENTS.md);
-built-in project skills live in `.omp/skills/` (`pi-desktop-feature`, `pi-desktop-release`).
+built-in project skills live in `.omp/skills/` (`rpcdesk-feature`, `rpcdesk-release`).
 
 ## Development
 
@@ -71,7 +79,7 @@ bun run build:app
 
 - copies `sidecar/src` and `package.json`;
 - installs the small production bridge dependency (`diff`);
-- copies the shared `@pi-desktop/protocol` package into the staged `node_modules`;
+- copies the shared `@rpcdesk/protocol` package into the staged `node_modules`;
 - gzips the Bun runtime (`process.execPath`) into `sidecar/bun.bin`; the app extracts it to the app support `bin/` folder on first launch.
 
 Platform bundles are:
@@ -80,7 +88,7 @@ Platform bundles are:
 - Windows: NSIS `.exe`
 - Linux: `.deb`, `.rpm`, and `.AppImage`
 
-The resulting bundle is about 80 MB (42 MB on disk for the `.app`); it does not bundle omp or pi, which are resolved at runtime. Builds are unsigned; local builds are for development.
+The resulting bundle is about 45 MB on disk for the `.app` (32 MB dmg); it does not bundle omp or pi, which are resolved at runtime. Bundles are signed for the updater; Apple/Windows code signing is not configured yet.
 
 On macOS, install the bundle somewhere outside a TCC-protected folder. Running it straight from `~/Documents` or `~/Desktop` makes macOS ask for folder access, which blocks the sidecar while the prompt is unanswered.
 
@@ -107,7 +115,7 @@ Themes are plain token maps (`src/themes.ts`), so a theme can be validated by th
 contrast rules the built-ins follow (text ≥ 7:1 on background, muted text ≥ 4.5:1, accents
 ≥ 3:1, and labels ≥ 4.5:1 against their accent). Selecting a theme also sets `color-scheme`, so
 native scrollbars, selects, and checkboxes match it. User theme packs in
-`~/.pi-desktop/themes/` appear in the same picker.
+`~/.rpcdesk/themes/` appear in the same picker.
 
 Light/dark are first-class: the default is System (follow the OS), and the sun/moon button in
 the status bar cycles system → light → dark without opening Settings. A named palette returns
@@ -126,10 +134,10 @@ accent rather than the browser defaults.
 
 | Path | Purpose |
 | --- | --- |
-| `~/.pi-desktop/settings.json` | App defaults: backend, approval mode/fallback, theme, restore tabs, update mode/feed |
-| `~/.pi-desktop/plugins/` | User plugins, one directory each |
-| `~/.pi-desktop/plugins.json` | Plugin enable/disable state |
-| `~/.pi-desktop/themes/` | JSON theme packs |
+| `~/.rpcdesk/settings.json` | App defaults: backend, approval mode/fallback, theme, restore tabs, update mode/feed |
+| `~/.rpcdesk/plugins/` | User plugins, one directory each |
+| `~/.rpcdesk/plugins.json` | Plugin enable/disable state |
+| `~/.rpcdesk/themes/` | JSON theme packs |
 | App support `ui-state.json` | Open tabs and active tab |
 | App support `runtimes/` | Optional managed CLI downloads |
 | App support `bin/` | Extracted Bun runtime used by the bridge |
@@ -137,11 +145,11 @@ accent rather than the browser defaults.
 
 App support locations:
 
-- macOS: `~/Library/Application Support/Pi Desktop`, logs in `~/Library/Logs/Pi Desktop`
-- Windows: `%LOCALAPPDATA%\Pi Desktop`, logs in `%LOCALAPPDATA%\Pi Desktop\logs`
-- Linux: `$XDG_DATA_HOME/pi-desktop` or `~/.local/share/pi-desktop`, logs in `$XDG_STATE_HOME/pi-desktop/logs` or `~/.local/state/pi-desktop/logs`
+- macOS: `~/Library/Application Support/rpcdesk`, logs in `~/Library/Logs/rpcdesk`
+- Windows: `%LOCALAPPDATA%\rpcdesk`, logs in `%LOCALAPPDATA%\rpcdesk\logs`
+- Linux: `$XDG_DATA_HOME/rpcdesk` or `~/.local/share/rpcdesk`, logs in `$XDG_STATE_HOME/rpcdesk/logs` or `~/.local/state/rpcdesk/logs`
 
-Set `PI_DESKTOP_OMP_PATH` or `PI_DESKTOP_PI_PATH` to force a specific CLI binary. Otherwise Pi Desktop searches `PATH`, then `~/.local/bin`, `~/.bun/bin`, Homebrew, `/usr/local/bin`, and the Windows npm/Programs folders.
+Set `RPCDESK_OMP_PATH` or `RPCDESK_PI_PATH` to force a specific CLI binary. Otherwise rpcdesk searches `PATH`, then `~/.local/bin`, `~/.bun/bin`, Homebrew, `/usr/local/bin`, and the Windows npm/Programs folders.
 
 omp settings remain in `~/.omp`; pi settings and sessions remain in `~/.pi`.
 
@@ -157,7 +165,7 @@ omp settings remain in `~/.omp`; pi settings and sessions remain in `~/.pi`.
 
 ## Plugins
 
-A plugin is a directory under `~/.pi-desktop/plugins` with a `plugin.json` and optional UI/agent entries. Use **Plugins → Create example** to generate one.
+A plugin is a directory under `~/.rpcdesk/plugins` with a `plugin.json` and optional UI/agent entries. Use **Plugins → Create example** to generate one.
 
 ```json
 {
@@ -185,22 +193,22 @@ Plugins are trusted local code. The webview CSP allows `unsafe-eval` specificall
 
 ## Updates
 
-Pi Desktop can update itself from a signed release feed. Settings → Updates chooses the mode:
+rpcdesk can update itself from a signed release feed. Settings → Updates chooses the mode:
 
 - **Off** — never checks automatically.
 - **Check and ask** (default) — checks at startup and shows an *Install and restart* banner.
 - **Install automatically** — installs the new version at startup and restarts.
 
-The feed URL comes from the settings field, or `PI_DESKTOP_UPDATE_ENDPOINT` when the field is
+The feed URL comes from the settings field, or `RPCDESK_UPDATE_ENDPOINT` when the field is
 empty. Releases must be signed with the updater key; the public key is committed in
 `src-tauri/tauri.conf.json`. `bun run build:app` signs automatically when
-`~/.Secrets/pi-desktop/updater.key` exists and otherwise builds without updater artifacts.
+`~/.Secrets/rpcdesk/updater.key` exists and otherwise builds without updater artifacts.
 See `docs/updates.md` for the manifest format, CI secrets, and per-platform behaviour. `bun run publish:update` packages, signs, and merges a release into a feed directory.
 
 ## Current limitations
 
 - pi and omp use the credentials already configured for their CLIs; without a model the onboarding panel points at provider docs.
-- The RPC surface is version-sensitive: Pi Desktop requires omp >= 18.12.0 or pi >= 1.4.0.
+- The RPC surface is version-sensitive: rpcdesk requires omp >= 18.12.0 or pi >= 1.4.0.
 - No Apple/Windows code signing or notarization; updates are verified with the updater key, not with platform signing.
 - Plugin UI is evaluated in the main webview, not sandboxed in a worker or iframe.
 - Linux runtime downloads use the glibc builds; Alpine/musl users should install a compatible CLI themselves.

@@ -4,7 +4,7 @@ import type {
   SessionInfo,
   SessionSnapshot,
   ThinkingLevel,
-} from "@pi-desktop/protocol";
+} from "@rpcdesk/protocol";
 
 export interface AgentBackend {
   start(): Promise<SessionSnapshot>;

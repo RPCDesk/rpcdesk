@@ -43,7 +43,7 @@ export function PluginManager() {
 
         <div className="max-h-[60vh] overflow-y-auto p-4">
           <div className="mb-3 text-[11px] leading-5 text-[var(--muted)]">
-            Plugins live in <code className="font-mono">~/.pi-desktop/plugins</code>{" "}
+            Plugins live in <code className="font-mono">~/.rpcdesk/plugins</code>{" "}
             and are trusted local code. UI changes reload instantly; agent extensions
             apply to new or restarted sessions.
           </div>

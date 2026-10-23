@@ -1,9 +1,9 @@
-# Handoff — Pi Desktop
+# Handoff — rpcdesk
 
 Working notes for whoever picks this up next (human or agent). Keep it current: it is the
 one file that should always describe the real state of the project.
 
-_Last updated: 2026-10-22 — after the CLI-RPC rewrite, cross-platform builds, and self-update._
+_Last updated: 2026-10-23 — after the rpcdesk rebrand, the design pass, and the Pages site._
 
 ## What this is
 
@@ -12,7 +12,7 @@ session, rendered as a chat transcript with streaming text, thinking, tool cards
 approvals, and resume. The app owns presentation and process lifecycle only: models,
 credentials, tools, sessions, and policy stay with the CLIs.
 
-Repository root: `~/Documents/Projects/pi-desktop` (macOS host).
+Repository root: `~/Documents/Projects/rpcdesk` (macOS host).
 
 ## Where things live
 
@@ -28,7 +28,7 @@ Repository root: `~/Documents/Projects/pi-desktop` (macOS host).
 | `docs/vms.md` | Local test VMs, build commands, guest-specific gotchas |
 | `CONTEXT.md` | Domain vocabulary — read before renaming anything |
 | `AGENTS.md` | Rules for AI agents editing this repo (loaded automatically as a context file) |
-| `.omp/skills/` | Built-in project skills: `pi-desktop-feature` (change procedure), `pi-desktop-release` (build/sign/publish) |
+| `.omp/skills/` | Built-in project skills: `rpcdesk-feature` (change procedure), `rpcdesk-release` (build/sign/publish) |
 
 ## Current state
 
@@ -49,7 +49,7 @@ Version `0.1.0` in `package.json` and `src-tauri/tauri.conf.json` (they must sta
 
 **Not yet done / open:**
 
-- No remote yet: the repository is local (`main`), and CI has never run against it. Before publishing, decide what to do with the test-VM credentials written in `docs/vms.md`.
+- No remote yet: the repository is local (`main`) with `origin` pointing at `git@github.com:rpcdesk/rpcdesk.git`, and CI has never run against it. The GitHub organization `rpcdesk` still has to be created in the web UI; then `git push -u origin main`. Before publishing, decide what to do with the test-VM credentials written in `docs/vms.md`.
 - CI (`.github/workflows/build.yml`) exists but has never run — needs a remote and the secrets `TAURI_SIGNING_PRIVATE_KEY` / `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. The matrix builds macOS arm64/x64, Linux x64, Windows x64.
 - No Apple/Windows code signing or notarization. Updates are verified with the updater key only.
 - Linux `.deb`/`.rpm` installs cannot self-update (updater limitation) — they need a package repository.
@@ -61,11 +61,11 @@ Version `0.1.0` in `package.json` and `src-tauri/tauri.conf.json` (they must sta
 
 `AGENTS.md` is the always-loaded rulebook. Two project skills ship in `.omp/skills/` and are
 discovered whenever an agent runs inside the repository (verified by resolving
-`skill://pi-desktop-feature` and `skill://pi-desktop-release` from a session at the repo root):
+`skill://rpcdesk-feature` and `skill://rpcdesk-release` from a session at the repo root):
 
-- `pi-desktop-feature` — where a change belongs, how to extend the frame protocol on both
+- `rpcdesk-feature` — where a change belongs, how to extend the frame protocol on both
   sides, what to test, how to run and verify, and the common failure modes.
-- `pi-desktop-release` — version bump, signed build, feed publishing, per-OS builds, and how to
+- `rpcdesk-release` — version bump, signed build, feed publishing, per-OS builds, and how to
   prove an update actually installs.
 
 Keep both in sync when the build or protocol procedure changes; they are the agent-facing copy
@@ -80,8 +80,8 @@ cargo test --manifest-path src-tauri/Cargo.toml
 bun run tauri dev                          # dev shell (needs the Vite dev server: bun run dev:web)
 bun run build:app                          # bundles + updater artifacts (signs when the key exists)
 bun run publish:update --version X --target darwin-aarch64 \
-  --artifact "src-tauri/target/release/bundle/macos/Pi Desktop.app" \
-  --base-url https://example.com/pi-desktop --feed dist-updates
+  --artifact "src-tauri/target/release/bundle/macos/rpcdesk.app" \
+  --base-url https://example.com/rpcdesk --feed dist-updates
 ```
 
 Rules of thumb: run tests before any Rust build (compiles are slow); `bun run stage:sidecar`
@@ -89,9 +89,9 @@ clears stale Tauri resource copies that otherwise leak into bundles.
 
 ## Environment facts and gotchas
 
-- Updater private key: `~/.Secrets/pi-desktop/updater.key` (never commit or print it). Public key is committed in `src-tauri/tauri.conf.json`. `PI_DESKTOP_SIGNING_KEY` overrides the path; without a key `build:app` still succeeds with updater artifacts disabled.
+- Updater private key: `~/.Secrets/rpcdesk/updater.key` (never commit or print it). Public key is committed in `src-tauri/tauri.conf.json`. `RPCDESK_SIGNING_KEY` overrides the path; without a key `build:app` still succeeds with updater artifacts disabled.
 - Update feeds must be HTTPS in release builds. Windows payloads must be **stored** (uncompressed) zips — the updater's zip reader has no codecs; use `bun run publish:update` rather than `zip`/`7z`.
-- `PI_DESKTOP_UPDATE_ENDPOINT`, `PI_DESKTOP_OMP_PATH`, `PI_DESKTOP_PI_PATH`, `PI_DESKTOP_BUN` override feed and binary resolution.
+- `RPCDESK_UPDATE_ENDPOINT`, `RPCDESK_OMP_PATH`, `RPCDESK_PI_PATH`, `RPCDESK_BUN` override feed and binary resolution.
 - macOS: launching the `.app` from a TCC-protected folder (`~/Documents`, `~/Desktop`) blocks the sidecar behind a folder-access prompt. Install to `/Applications`.
 - Windows: set `RUSTUP_TOOLCHAIN` with `set "VAR=value"` (a trailing space breaks rustup); builds need `vcvarsall.bat arm64_x64`.
 - Linux VM: `/tmp` is a 1.5 GB tmpfs; clear it before AppImage builds. The guest has no usable GPU, so run the app with `LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1`.
@@ -105,7 +105,7 @@ clears stale Tauri resource copies that otherwise leak into bundles.
 - Frames between host and sidecar are newline-delimited JSON with runtime guards in `packages/protocol`; extend the guard and its test with any new frame.
 - The Bun runtime ships gzipped as `sidecar/bun.bin` and is inflated into the app-support `bin/` folder on first launch. Keep the payload compressed; a raw binary breaks the AppImage bundler.
 - Platform directories come from `src-tauri/src/paths.rs` — no ad-hoc `$HOME` concatenation.
-- Plugins are user-level only (`~/.pi-desktop/plugins`), never project-level.
+- Plugins are user-level only (`~/.rpcdesk/plugins`), never project-level.
 - Theme palettes in `src/themes.ts` must satisfy the invariants in `src/themes.test.ts` (all tokens present, dark surfaces lighten as they stack, light insets darken, contrast floors, label colour on accent via `--on-accent`). Never hard-code `text-white` on an accent surface.
 - Base element styles in `src/styles/tokens.css` live inside `@layer base`; unlayered rules there outrank Tailwind utilities and silently drop classes like `text-[var(--muted)]` on buttons and inputs.
 - Vocabulary in `CONTEXT.md` is authoritative (harness, backend, sidecar, host, frame, runtime, session, tab, workspace, transcript).

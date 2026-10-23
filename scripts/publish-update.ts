@@ -9,8 +9,8 @@ import { createStoredZip } from "./zip-store";
  *
  *   bun scripts/publish-update.ts \
  *     --version 0.2.0 --target darwin-aarch64 \
- *     --artifact "src-tauri/target/release/bundle/macos/Pi Desktop.app" \
- *     --base-url https://example.com/pi-desktop \
+ *     --artifact "src-tauri/target/release/bundle/macos/rpcdesk.app" \
+ *     --base-url https://example.com/rpcdesk \
  *     --feed /tmp/pi-update-feed
  */
 
@@ -33,8 +33,8 @@ function arg(name: string, required = true): string | undefined {
 
 function parseArgs(): Args {
   const key =
-    process.env.PI_DESKTOP_SIGNING_KEY ??
-    join(homedir(), ".Secrets/pi-desktop/updater.key");
+    process.env.RPCDESK_SIGNING_KEY ??
+    join(homedir(), ".Secrets/rpcdesk/updater.key");
   return {
     version: arg("version")!,
     target: arg("target")!,
@@ -48,9 +48,9 @@ function parseArgs(): Args {
 
 function archiveName(target: string, version: string): string {
   const family = target.split("-")[0];
-  if (family === "windows") return `Pi.Desktop_${version}_${target}.nsis.zip`;
-  if (family === "linux") return `Pi.Desktop_${version}_${target}.AppImage.tar.gz`;
-  return `Pi.Desktop_${version}_${target}.app.tar.gz`;
+  if (family === "windows") return `rpcdesk_${version}_${target}.nsis.zip`;
+  if (family === "linux") return `rpcdesk_${version}_${target}.AppImage.tar.gz`;
+  return `rpcdesk_${version}_${target}.app.tar.gz`;
 }
 
 async function run(cmd: string[], cwd: string): Promise<void> {

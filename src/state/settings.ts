@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { ApprovalMode, Backend } from "@pi-desktop/protocol";
+import type { ApprovalMode, Backend } from "@rpcdesk/protocol";
 import { call } from "../lib/tauri";
 
 export type UpdateMode = "off" | "notify" | "auto";

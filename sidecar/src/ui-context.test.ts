@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { SidecarFrame } from "@pi-desktop/protocol";
+import type { SidecarFrame } from "@rpcdesk/protocol";
 import { createUiContext } from "./ui-context";
 
 function harness() {

@@ -243,9 +243,9 @@ fn executable_names(backend: &str) -> Vec<String> {
 fn candidate_paths(backend: &str) -> Vec<PathBuf> {
     let mut candidates = Vec::new();
     let env_name = if backend == "pi" {
-        "PI_DESKTOP_PI_PATH"
+        "RPCDESK_PI_PATH"
     } else {
-        "PI_DESKTOP_OMP_PATH"
+        "RPCDESK_OMP_PATH"
     };
     if let Some(path) = std::env::var_os(env_name) {
         candidates.push(PathBuf::from(path));
@@ -718,7 +718,7 @@ mod tests {
             checksum: "0f7256ea8bdac3af20012b94fdc1252a31cc6dc0d2f9b9eb539555d22e3e321b",
             archive: ArchiveKind::Zip,
         };
-        let root = std::env::temp_dir().join(format!("pi-desktop-zip-{}", std::process::id()));
+        let root = std::env::temp_dir().join(format!("rpcdesk-zip-{}", std::process::id()));
         let _ = tokio::fs::remove_dir_all(&root).await;
         tokio::fs::create_dir_all(&root).await.expect("temp dir");
         let archive = root.join("pi.zip");
@@ -740,7 +740,7 @@ mod tests {
     #[ignore]
     async fn downloads_and_extracts_the_pi_release() {
         let release = release_for("pi").expect("pi release");
-        let root = std::env::temp_dir().join(format!("pi-desktop-runtime-{}", std::process::id()));
+        let root = std::env::temp_dir().join(format!("rpcdesk-runtime-{}", std::process::id()));
         let _ = tokio::fs::remove_dir_all(&root).await;
         tokio::fs::create_dir_all(&root).await.expect("temp dir");
         let archive = root.join("pi.tar.gz");

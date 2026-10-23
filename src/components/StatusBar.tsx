@@ -8,7 +8,7 @@ import {
   ShieldCheck,
   Sun,
 } from "lucide-react";
-import type { ApprovalMode, ThinkingLevel } from "@pi-desktop/protocol";
+import type { ApprovalMode, ThinkingLevel } from "@rpcdesk/protocol";
 import { useTabs } from "../state/tabs";
 import { useUi } from "../state/ui";
 import { setApprovalMode, setModel, setThinking } from "../lib/host";

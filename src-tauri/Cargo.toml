@@ -1,13 +1,13 @@
 [package]
-name = "pi-desktop"
+name = "rpcdesk"
 version = "0.1.0"
-description = "Pi Desktop"
+description = "rpcdesk"
 authors = ["aaxyat"]
 edition = "2021"
 rust-version = "1.77.2"
 
 [lib]
-name = "pi_desktop_lib"
+name = "rpcdesk_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

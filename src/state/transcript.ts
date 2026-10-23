@@ -1,4 +1,4 @@
-import { isRecord } from "@pi-desktop/protocol";
+import { isRecord } from "@rpcdesk/protocol";
 
 export interface ToolDiff {
   path: string;

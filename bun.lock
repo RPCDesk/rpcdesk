@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "pi-desktop",
+      "name": "rpcdesk",
       "dependencies": {
         "@tanstack/react-virtual": "^3.13.0",
         "@tauri-apps/api": "^2.12.4",
@@ -32,15 +32,15 @@
       },
     },
     "packages/plugin-api": {
-      "name": "@pi-desktop/plugin-api",
+      "name": "@rpcdesk/plugin-api",
       "version": "0.1.0",
     },
     "packages/protocol": {
-      "name": "@pi-desktop/protocol",
+      "name": "@rpcdesk/protocol",
       "version": "0.1.0",
     },
     "sidecar": {
-      "name": "@pi-desktop/sidecar",
+      "name": "@rpcdesk/sidecar",
       "version": "0.1.0",
       "dependencies": {
         "diff": "8.0.4",
@@ -155,11 +155,11 @@
 
     "@oxc-project/types": ["@oxc-project/types@0.155.0", "", {}, "sha512-SeE8JPwW1xs1tHeNycjUtUBdhorRa8o4jlvjwk49R7/Z291i+4DQa7JJIgOm/TaYQZx+QrPQbVJ/9c8dMIZN8Q=="],
 
-    "@pi-desktop/plugin-api": ["@pi-desktop/plugin-api@workspace:packages/plugin-api"],
+    "@rpcdesk/plugin-api": ["@rpcdesk/plugin-api@workspace:packages/plugin-api"],
 
-    "@pi-desktop/protocol": ["@pi-desktop/protocol@workspace:packages/protocol"],
+    "@rpcdesk/protocol": ["@rpcdesk/protocol@workspace:packages/protocol"],
 
-    "@pi-desktop/sidecar": ["@pi-desktop/sidecar@workspace:sidecar"],
+    "@rpcdesk/sidecar": ["@rpcdesk/sidecar@workspace:sidecar"],
 
     "@rolldown/binding-android-arm-eabi": ["@rolldown/binding-android-arm-eabi@1.2.15", "", { "os": "android", "cpu": "arm" }, "sha512-aLcgK9gIJ3YRvrrtfSBbRa27F5WrpiTaPulnFpsHPxpUHgFlSgnU4854MHwoRGEBhfRJDWCS2WQ7lIjskE9Olw=="],
 

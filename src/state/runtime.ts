@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { listen } from "@tauri-apps/api/event";
-import type { Backend } from "@pi-desktop/protocol";
+import type { Backend } from "@rpcdesk/protocol";
 import { call, isTauri } from "../lib/tauri";
 import { useUi } from "./ui";
 

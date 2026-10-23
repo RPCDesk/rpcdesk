@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@pi-desktop/protocol": path.resolve(process.cwd(), "packages/protocol/src/index.ts"),
+      "@rpcdesk/protocol": path.resolve(process.cwd(), "packages/protocol/src/index.ts"),
     },
   },
   clearScreen: false,

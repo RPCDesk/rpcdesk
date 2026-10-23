@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ExternalLink, X } from "lucide-react";
-import type { ApprovalMode, Backend } from "@pi-desktop/protocol";
+import type { ApprovalMode, Backend } from "@rpcdesk/protocol";
 import { useSettings } from "../state/settings";
 import { useRuntime, formatBytes } from "../state/runtime";
 import { UpdateSettings } from "./UpdateBanner";
@@ -213,7 +213,7 @@ export function SettingsSheet() {
               </button>
             </Row>
             <div className="py-1.5 text-[10px] leading-4 text-[var(--muted)]">
-              Plugins are trusted local code from ~/.pi-desktop/plugins. They can
+              Plugins are trusted local code from ~/.rpcdesk/plugins. They can
               register panels, tool renderers, commands, themes, and agent-side tools.
             </div>
           </Section>
@@ -222,8 +222,8 @@ export function SettingsSheet() {
             <div className="space-y-1 py-1.5 font-mono text-[10px] text-[var(--muted)]">
               <div>omp config: ~/.omp</div>
               <div>pi config: ~/.pi</div>
-              <div>app config: ~/.pi-desktop</div>
-              <div>logs: macOS ~/Library/Logs/Pi Desktop; Windows/Linux app support/logs</div>
+              <div>app config: ~/.rpcdesk</div>
+              <div>logs: macOS ~/Library/Logs/rpcdesk; Windows/Linux app support/logs</div>
             </div>
             <Row label="Provider docs">
               <div className="flex gap-2">
@@ -247,7 +247,7 @@ export function SettingsSheet() {
 
           <Section title="Diagnostics">
             <Row label="Version">
-              <span className="font-mono text-[11px]">Pi Desktop 0.1.0</span>
+              <span className="font-mono text-[11px]">rpcdesk 0.1.0</span>
             </Row>
             <Row label="Active session">
               <span className="font-mono text-[11px]">

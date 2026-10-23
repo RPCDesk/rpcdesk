@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FolderOpen, ShieldCheck, Sparkles } from "lucide-react";
-import type { Backend } from "@pi-desktop/protocol";
+import type { Backend } from "@rpcdesk/protocol";
 import { pickDirectory, isTauri } from "../lib/tauri";
 import { useTabs } from "../state/tabs";
 import { useSettings } from "../state/settings";
@@ -27,13 +27,13 @@ export function Welcome() {
   return (
     <div className="flex h-full flex-col items-center justify-center px-8">
       <div className="flex w-full max-w-[420px] flex-col items-center rounded-[28px] border border-[var(--border)] bg-[var(--surface)] px-8 py-9 shadow-[var(--shadow-card)]">
-      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--fg)] text-2xl font-semibold text-[var(--bg)]">
-        π
+      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--fg)] font-mono text-[20px] font-semibold tracking-[-0.06em] text-[var(--bg)]">
+        ›_
       </div>
-      <h1 className="text-[22px] font-semibold tracking-tight">Pi Desktop</h1>
+      <h1 className="text-[22px] font-semibold tracking-tight">rpcdesk</h1>
       <p className="mt-1 max-w-md text-center text-[12px] leading-5 text-[var(--muted)]">
-        A hackable front-end for pi and omp. Sessions, approvals, and plugins live
-        in your own config directories.
+        A desktop cockpit for coding-agent CLIs. rpcdesk runs omp and pi in RPC mode,
+        one session per tab, with approvals, plugins, and self-updates.
       </p>
 
       <div className="mt-6 flex items-center gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-1">

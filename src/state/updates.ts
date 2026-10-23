@@ -76,7 +76,7 @@ export function updateSummary(
         ? `Version ${info.version} is available (you have ${currentVersion}).`
         : "An update is available.";
     case "up-to-date":
-      return `Pi Desktop ${currentVersion} is up to date.`;
+      return `rpcdesk ${currentVersion} is up to date.`;
     case "downloading":
       return `Downloading ${info?.version ?? "update"} — ${formatProgress(progress)}`;
     case "installing":
@@ -127,7 +127,7 @@ export const useUpdates = create<UpdateStore>((set, get) => ({
         if (manual) {
           useUi
             .getState()
-            .pushToast(`Pi Desktop ${get().currentVersion} is up to date`, "success");
+            .pushToast(`rpcdesk ${get().currentVersion} is up to date`, "success");
         }
         return;
       }
@@ -139,7 +139,7 @@ export const useUpdates = create<UpdateStore>((set, get) => ({
       if (manual) {
         useUi
           .getState()
-          .pushToast(`Pi Desktop ${info.version} is available`, "info");
+          .pushToast(`rpcdesk ${info.version} is available`, "info");
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);

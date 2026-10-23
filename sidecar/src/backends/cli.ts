@@ -14,7 +14,7 @@ import {
   type SessionSnapshot,
   type SidecarFrame,
   type ThinkingLevel,
-} from "@pi-desktop/protocol";
+} from "@rpcdesk/protocol";
 import type { AgentBackend } from "../backend";
 import { CliProcess } from "../cli-process";
 import { findSessionFile, listSessions } from "../cli-sessions";
@@ -117,7 +117,7 @@ export async function createCliBackend({
 
   const gateConfigPath = join(
     tmpdir(),
-    `pi-desktop-gate-${process.pid}-${Date.now()}-${Math.random().toString(16).slice(2)}.json`,
+    `rpcdesk-gate-${process.pid}-${Date.now()}-${Math.random().toString(16).slice(2)}.json`,
   );
 
   const gateExtension = fileURLToPath(
@@ -380,7 +380,7 @@ export async function createCliBackend({
       command: cliPath,
       args: spawnArgs(resume),
       cwd,
-      env: backend === "pi" ? { PI_DESKTOP_GATE_CONFIG: gateConfigPath } : undefined,
+      env: backend === "pi" ? { RPCDESK_GATE_CONFIG: gateConfigPath } : undefined,
       onLine: handleLine,
       onExit: (code) => {
         cliExited = code;

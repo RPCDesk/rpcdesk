@@ -1,6 +1,6 @@
-# Pi Desktop
+# rpcdesk
 
-Pi Desktop is a macOS, Windows, and Linux front-end for the pi and omp coding-agent harnesses. It renders one persisted agent session per tab and delegates all model, tool, and policy behavior to the selected harness.
+rpcdesk is a macOS, Windows, and Linux front-end for the pi and omp coding-agent harnesses. It renders one persisted agent session per tab and delegates all model, tool, and policy behavior to the selected harness.
 
 ## Language
 

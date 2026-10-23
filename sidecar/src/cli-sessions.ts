@@ -1,7 +1,7 @@
 import { readdir, open, realpath, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 import { basename, join, resolve } from "node:path";
-import type { Backend, SessionInfo } from "@pi-desktop/protocol";
+import type { Backend, SessionInfo } from "@rpcdesk/protocol";
 
 const MAX_SESSION_BYTES = 96 * 1024;
 const MAX_SESSIONS = 60;

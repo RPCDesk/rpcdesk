@@ -1,4 +1,4 @@
-import type { ApprovalMode, ToolTier } from "@pi-desktop/protocol";
+import type { ApprovalMode, ToolTier } from "@rpcdesk/protocol";
 
 const READ_TOOLS: Record<string, true> = {
   read: true,
@@ -128,7 +128,7 @@ export function createPiGate(state: GateState) {
         state.grants.add(grantKey);
         return undefined;
       }
-      return { block: true, reason: "Rejected in Pi Desktop" };
+      return { block: true, reason: "Rejected in rpcdesk" };
     });
   };
 }

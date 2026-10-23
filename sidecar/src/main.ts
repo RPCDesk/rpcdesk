@@ -1,10 +1,10 @@
-import { parseHostFrame } from "@pi-desktop/protocol";
+import { parseHostFrame } from "@rpcdesk/protocol";
 import type {
   ApprovalMode,
   Backend,
   SessionSnapshot,
   SidecarFrame,
-} from "@pi-desktop/protocol";
+} from "@rpcdesk/protocol";
 import { createCliBackend } from "./backends/cli";
 import { createHost } from "./host";
 import { listAgentExtensionFiles } from "./plugins";

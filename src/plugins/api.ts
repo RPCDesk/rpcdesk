@@ -1,5 +1,5 @@
 import type { ComponentType, MouseEventHandler } from "react";
-import type { SessionSnapshot } from "@pi-desktop/protocol";
+import type { SessionSnapshot } from "@rpcdesk/protocol";
 import type { ToolDiff } from "../state/transcript";
 
 export interface ToolRendererProps {

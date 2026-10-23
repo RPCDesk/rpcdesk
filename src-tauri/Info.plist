@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
   <key>NSDocumentsFolderUsageDescription</key>
-  <string>Pi Desktop reads and edits files in the workspace you choose, including folders under Documents.</string>
+  <string>rpcdesk reads and edits files in the workspace you choose, including folders under Documents.</string>
   <key>NSDesktopFolderUsageDescription</key>
-  <string>Pi Desktop reads and edits files in the workspace you choose, including folders on the Desktop.</string>
+  <string>rpcdesk reads and edits files in the workspace you choose, including folders on the Desktop.</string>
   <key>NSDownloadsFolderUsageDescription</key>
-  <string>Pi Desktop reads and edits files in the workspace you choose, including folders in Downloads.</string>
+  <string>rpcdesk reads and edits files in the workspace you choose, including folders in Downloads.</string>
   <key>NSRemovableVolumesUsageDescription</key>
-  <string>Pi Desktop reads and edits files in the workspace you choose on removable volumes.</string>
+  <string>rpcdesk reads and edits files in the workspace you choose on removable volumes.</string>
 </dict>
 </plist>

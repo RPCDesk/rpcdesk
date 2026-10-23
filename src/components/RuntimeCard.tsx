@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Download, HardDrive, RefreshCw } from "lucide-react";
-import type { Backend } from "@pi-desktop/protocol";
+import type { Backend } from "@rpcdesk/protocol";
 import { useRuntime, formatBytes } from "../state/runtime";
 
 export function RuntimeCard({ backend }: { backend: Backend }) {
@@ -36,7 +36,7 @@ export function RuntimeCard({ backend }: { backend: Backend }) {
         {backend} CLI not found
       </div>
       <div className="mt-1 text-[11px] leading-5 text-[var(--muted)]">
-        Pi Desktop runs your installed {backend} CLI. Install it, or download the
+        rpcdesk runs your installed {backend} CLI. Install it, or download the
         official standalone build ({formatBytes(status.download.size)}) into the app
         support folder. The download is verified with SHA-256.
       </div>

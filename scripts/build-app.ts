@@ -5,9 +5,9 @@ import { join, resolve } from "node:path";
 const root = resolve(import.meta.dir, "..");
 
 function signingKey(): string | undefined {
-  const explicit = process.env.PI_DESKTOP_SIGNING_KEY;
+  const explicit = process.env.RPCDESK_SIGNING_KEY;
   if (explicit && existsSync(explicit)) return explicit;
-  const candidate = join(homedir(), ".Secrets/pi-desktop/updater.key");
+  const candidate = join(homedir(), ".Secrets/rpcdesk/updater.key");
   return existsSync(candidate) ? candidate : undefined;
 }
 
@@ -24,7 +24,7 @@ async function main(): Promise<void> {
     console.log(`Signing updater artifacts with ${key}`);
   } else {
     console.log(
-      "No signing key found (PI_DESKTOP_SIGNING_KEY or ~/.Secrets/pi-desktop/updater.key); building without updater artifacts.",
+      "No signing key found (RPCDESK_SIGNING_KEY or ~/.Secrets/rpcdesk/updater.key); building without updater artifacts.",
     );
     args.push(
       "--config",
