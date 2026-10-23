@@ -52,7 +52,8 @@ Version `0.1.0` in `package.json` and `src-tauri/tauri.conf.json` (they must sta
 - Published at https://github.com/RPCDesk/rpcdesk (`main`, public). Homepage is the Pages site. CI secrets `TAURI_SIGNING_PRIVATE_KEY` / `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` are set, but the workflow has not been dispatched yet.
 - Credit: the org login is canonically `RPCDesk` (GitHub preserves the capitalization chosen at creation); URLs are case-insensitive and the brand stays lowercase.
 - Before making the repo more prominent, decide what to do with the test-VM credentials written in `docs/vms.md`.
-- CI (`.github/workflows/build.yml`) exists but has never run — needs a remote and the secrets `TAURI_SIGNING_PRIVATE_KEY` / `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`. The matrix builds macOS arm64/x64, Linux x64, Windows x64.
+- CI is green: run `39928522930` built macOS arm64/x64, Linux x64, and Windows x64 (artifacts per target). Two fixes were needed and are committed: build the web bundle before cargo (`generate_context!` embeds `../dist`), and install only the ayatana indicator on Ubuntu 22.04.
+- Release flow: push a `v*` tag; `tauri-action` uploads signed bundles plus `latest.json`, and the app's default updater endpoint points at `releases/latest/download/latest.json`.
 - No Apple/Windows code signing or notarization. Updates are verified with the updater key only.
 - Linux `.deb`/`.rpm` installs cannot self-update (updater limitation) — they need a package repository.
 - Plugin UI runs unsandboxed in the main webview (CSP allows `eval` for transpiled plugin UI). A worker/iframe sandbox is unbuilt.

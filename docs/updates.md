@@ -51,6 +51,18 @@ the `zip` crate built without compression codecs, and a deflated archive fails w
 stored zips itself, so use it instead of `zip`/`7z` when publishing Windows releases. macOS
 and Linux payloads are `.tar.gz` and unaffected.
 
+## Feed
+
+Release builds ship with a default endpoint:
+
+```
+https://github.com/RPCDesk/rpcdesk/releases/latest/download/latest.json
+```
+
+`tauri-action` uploads that manifest plus the signed bundles when a `v*` tag is pushed, so
+cutting a release is `git tag vX.Y.Z && git push origin vX.Y.Z`. The `updateEndpoint`
+setting (or `RPCDESK_UPDATE_ENDPOINT`) overrides the default for pre-release testing.
+
 ## Publishing a release
 
 ```sh
