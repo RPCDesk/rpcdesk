@@ -67,10 +67,13 @@ jobs:
       - name: Stage bridge
         run: bun run stage:sidecar
 
+      # `tauri::generate_context!()` embeds ../dist, so the web build must exist
+      # before any cargo command runs.
+      - name: Build web
+        run: bun run build:web
+
       - name: Typecheck and tests
-        run: |
-          bun run typecheck
-          bun run test
+        run: bun run test
 
       - name: Rust tests
         run: cargo test --manifest-path src-tauri/Cargo.toml
