@@ -1,6 +1,6 @@
 # rpcdesk
 
-**Site:** [rpcdesk.ayushb.com](https://rpcdesk.ayushb.com) · **Source:** [github.com/RPCDesk/rpcdesk](https://github.com/RPCDesk/rpcdesk) · **Releases:** [latest](https://github.com/RPCDesk/rpcdesk/releases/latest)
+**Site:** [rpcdesk.pages.dev](https://rpcdesk.pages.dev) · **Source:** [github.com/RPCDesk/rpcdesk](https://github.com/RPCDesk/rpcdesk) · **Releases:** [latest](https://github.com/RPCDesk/rpcdesk/releases/latest)
 
 [![Build desktop bundles](https://github.com/RPCDesk/rpcdesk/actions/workflows/build.yml/badge.svg)](https://github.com/RPCDesk/rpcdesk/actions/workflows/build.yml)
 
@@ -14,7 +14,7 @@ rpcdesk prefers an installed `omp` or `pi` and only offers to download an offici
 
 | Repository | Purpose |
 | --- | --- |
-| [RPCDesk/website](https://github.com/RPCDesk/website) | The static site (`rpcdesk.ayushb.com`), deployed to Cloudflare Pages on push |
+| [RPCDesk/website](https://github.com/RPCDesk/website) | The static site (`rpcdesk.pages.dev`), deployed to Cloudflare Pages on push |
 | [RPCDesk/issues](https://github.com/RPCDesk/issues) | Public issue tracker — bugs, feature requests, questions |
 
 Security problems go through this repository's
