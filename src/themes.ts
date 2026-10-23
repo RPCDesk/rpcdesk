@@ -39,14 +39,14 @@ export const REQUIRED_THEME_TOKENS = THEME_TOKENS.filter(
 );
 
 const lightTokens: Record<string, string> = {
-  "--bg": "#f7f7f8",
+  "--bg": "#f3f4f7",
   "--surface": "#ffffff",
-  "--surface-2": "#f2f2f4",
-  "--surface-3": "#e9e9ec",
-  "--fg": "#1d1d1f",
-  "--muted": "#6e6e73",
-  "--border": "rgba(0, 0, 0, 0.1)",
-  "--border-strong": "rgba(0, 0, 0, 0.18)",
+  "--surface-2": "#eaedf2",
+  "--surface-3": "#dfe4ec",
+  "--fg": "#16181d",
+  "--muted": "#5f6773",
+  "--border": "rgba(16, 24, 38, 0.09)",
+  "--border-strong": "rgba(16, 24, 38, 0.17)",
   "--accent": "#0a6fd6",
   "--accent-soft": "rgba(10, 111, 214, 0.12)",
   "--on-accent": "#ffffff",
@@ -56,18 +56,18 @@ const lightTokens: Record<string, string> = {
   "--warning-soft": "rgba(178, 80, 0, 0.12)",
   "--error": "#d70015",
   "--error-soft": "rgba(215, 0, 21, 0.1)",
-  "--shadow-pop": "0 10px 40px rgba(0, 0, 0, 0.16)",
+  "--shadow-pop": "0 20px 56px rgba(15, 23, 42, 0.16)",
 };
 
 const darkTokens: Record<string, string> = {
-  "--bg": "#1c1c1e",
-  "--surface": "#242426",
-  "--surface-2": "#2c2c2e",
-  "--surface-3": "#363638",
-  "--fg": "#f5f5f7",
-  "--muted": "#a1a1a6",
-  "--border": "rgba(255, 255, 255, 0.1)",
-  "--border-strong": "rgba(255, 255, 255, 0.18)",
+  "--bg": "#131418",
+  "--surface": "#191b20",
+  "--surface-2": "#202329",
+  "--surface-3": "#282c34",
+  "--fg": "#f3f4f8",
+  "--muted": "#a3aab5",
+  "--border": "rgba(255, 255, 255, 0.09)",
+  "--border-strong": "rgba(255, 255, 255, 0.17)",
   "--accent": "#0a84ff",
   "--accent-soft": "rgba(10, 132, 255, 0.2)",
   "--on-accent": "#06121f",
@@ -77,9 +77,8 @@ const darkTokens: Record<string, string> = {
   "--warning-soft": "rgba(255, 159, 10, 0.14)",
   "--error": "#ff453a",
   "--error-soft": "rgba(255, 69, 58, 0.14)",
-  "--shadow-pop": "0 10px 40px rgba(0, 0, 0, 0.5)",
+  "--shadow-pop": "0 20px 56px rgba(0, 0, 0, 0.6)",
 };
-
 
 /**
  * Modern palettes. Each theme sets every visual token so switching themes never leaks

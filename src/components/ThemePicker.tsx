@@ -1,13 +1,23 @@
 import { Check } from "lucide-react";
 import type { ThemeDefinition } from "../themes";
 
-const SYSTEM_PREVIEW = { bg: "#f7f7f8", surface: "#1c1c1e", accent: "#0a84ff" };
+const SYSTEM_PREVIEW = {
+  bg: "#f3f4f7",
+  panel: "#eaedf2",
+  line: "rgba(22, 24, 29, 0.28)",
+  accent: "#0a6fd6",
+};
 
 function preview(theme: ThemeDefinition) {
   if (theme.appearance === "system") return SYSTEM_PREVIEW;
+  const bg = theme.tokens["--bg"] ?? SYSTEM_PREVIEW.bg;
+  const panel = theme.tokens["--surface-2"] ?? theme.tokens["--surface"] ?? SYSTEM_PREVIEW.panel;
+  const fg = theme.tokens["--fg"] ?? "#16181d";
   return {
-    bg: theme.tokens["--bg"] ?? SYSTEM_PREVIEW.bg,
-    surface: theme.tokens["--surface-2"] ?? theme.tokens["--surface"] ?? SYSTEM_PREVIEW.surface,
+    bg,
+    panel,
+    // Lines borrow the foreground so they read on both light and dark previews.
+    line: `color-mix(in srgb, ${fg} 32%, transparent)`,
     accent: theme.tokens["--accent"] ?? SYSTEM_PREVIEW.accent,
   };
 }
@@ -35,24 +45,24 @@ export function ThemeSwatch({
       }`}
     >
       <span
-        className="relative flex h-[44px] items-end gap-1 overflow-hidden rounded-md p-1.5"
+        className="relative flex h-[46px] items-stretch gap-1.5 overflow-hidden rounded-md p-1.5"
         style={{ background: colors.bg }}
       >
         <span
-          className="h-full w-[38%] rounded-sm"
-          style={{ background: colors.surface }}
+          className="w-[32%] rounded-[4px]"
+          style={{ background: colors.panel }}
         />
-        <span className="flex flex-1 flex-col gap-1 pb-0.5">
+        <span className="flex flex-1 flex-col justify-center gap-1">
           <span
-            className="h-1 w-full rounded-full opacity-70"
-            style={{ background: colors.surface }}
+            className="h-[3px] w-[86%] rounded-full"
+            style={{ background: colors.line }}
           />
           <span
-            className="h-1 w-[70%] rounded-full opacity-70"
-            style={{ background: colors.surface }}
+            className="h-[3px] w-[58%] rounded-full"
+            style={{ background: colors.line }}
           />
           <span
-            className="h-1.5 w-1.5 rounded-full"
+            className="mt-0.5 h-2 w-5 rounded-full"
             style={{ background: colors.accent }}
           />
         </span>

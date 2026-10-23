@@ -55,8 +55,8 @@ export function DialogHost() {
   const prompt = dialog.prompt;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-6">
-      <div className="w-full max-w-[560px] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-pop)]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 p-6 backdrop-blur-[2px]">
+      <div className="w-full max-w-[560px] overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-pop)]">
         <div className="flex items-center gap-2 border-b border-[var(--border)] px-4 py-3">
           {dialog.kind === "approve" ? (
             <ShieldCheck size={15} className="text-[var(--accent)]" />

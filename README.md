@@ -109,6 +109,19 @@ contrast rules the built-ins follow (text ≥ 7:1 on background, muted text ≥ 
 native scrollbars, selects, and checkboxes match it. User theme packs in
 `~/.pi-desktop/themes/` appear in the same picker.
 
+Light/dark are first-class: the default is System (follow the OS), and the sun/moon button in
+the status bar cycles system → light → dark without opening Settings. A named palette returns
+to System on the first press (`src/state/appearance.ts`).
+
+### Design system
+
+One radius scale (`6 / 8 / 12 / 16 / 20 / 24 / 28px`) and one shadow scale live in
+`src/styles/tokens.css` under `@theme`, so `rounded-md`, `rounded-xl`, `shadow-md` and friends
+resolve to the same values everywhere. Surfaces stack in three layers — page (`--bg`), panels
+(`--surface`, used by the sidebar and inspector), and insets (`--surface-2/3`, used by section
+cards and code blocks) — and the focus ring, scrollbar, and selection colors come from the
+accent rather than the browser defaults.
+
 ## Configuration
 
 | Path | Purpose |

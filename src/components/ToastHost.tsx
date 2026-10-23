@@ -30,7 +30,7 @@ function Toast({ toast }: { toast: ToastMessage }) {
 
   return (
     <div
-      className={`mb-2 flex max-w-[360px] items-start gap-2 rounded-lg border px-3 py-2 shadow-[var(--shadow-pop)] ${color}`}
+      className={`mb-2 flex max-w-[360px] items-start gap-2 rounded-2xl border px-3.5 py-2.5 shadow-[var(--shadow-pop)] ${color}`}
     >
       <Icon size={14} className="mt-0.5 shrink-0" />
       <div className="flex-1 text-[12px] leading-5">{toast.message}</div>

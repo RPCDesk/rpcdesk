@@ -155,9 +155,9 @@ export function Composer({ tab }: { tab: Tab }) {
   };
 
   return (
-    <div className="relative border-t border-[var(--border)] bg-[var(--bg)] px-6 py-3">
+    <div className="relative border-t border-[var(--border)] bg-[var(--bg)] px-6 pb-4 pt-3">
       {paletteOpen && filtered.length > 0 ? (
-        <div className="absolute bottom-full left-6 right-6 mb-2 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-pop)]">
+        <div className="absolute bottom-full left-6 right-6 mb-2 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-pop)]">
           {filtered.slice(0, 8).map((command, index) => (
             <button
               key={command.id}
@@ -179,7 +179,7 @@ export function Composer({ tab }: { tab: Tab }) {
         </div>
       ) : null}
 
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-sm focus-within:border-[var(--border-strong)]">
+      <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)] transition-shadow focus-within:border-[var(--border-strong)] focus-within:shadow-[var(--shadow-md)]">
         <textarea
           ref={textareaRef}
           value={text}
@@ -196,9 +196,9 @@ export function Composer({ tab }: { tab: Tab }) {
               ? "Waiting for the session…"
               : "Ask for a change, a review, or an investigation…"
           }
-          className="max-h-[220px] min-h-[44px] w-full resize-none bg-transparent px-3.5 pt-3 text-[13px] leading-6 outline-none placeholder:text-[var(--muted)] disabled:opacity-50"
+          className="max-h-[220px] min-h-[46px] w-full resize-none bg-transparent px-4 pt-3.5 text-[13px] leading-6 outline-none placeholder:text-[var(--muted)] disabled:opacity-50"
         />
-        <div className="flex items-center gap-2 px-2.5 pb-2">
+        <div className="flex items-center gap-2 px-3 pb-2.5">
           <div className="text-[10px] text-[var(--muted)]">
             {tab.backend === "omp" ? "omp" : "pi"}
           </div>
@@ -207,7 +207,7 @@ export function Composer({ tab }: { tab: Tab }) {
               <>
                 <button
                   type="button"
-                  className="rounded-md border border-[var(--border)] px-2 py-1 text-[11px] hover:bg-[var(--surface-2)]"
+                  className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[11px] transition-colors hover:bg-[var(--surface-2)]"
                   onClick={() => submit("steer")}
                   title="Insert into the active run"
                 >
@@ -216,7 +216,7 @@ export function Composer({ tab }: { tab: Tab }) {
                 </button>
                 <button
                   type="button"
-                  className="rounded-md border border-[var(--border)] px-2 py-1 text-[11px] hover:bg-[var(--surface-2)]"
+                  className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[11px] transition-colors hover:bg-[var(--surface-2)]"
                   onClick={() => submit("follow-up")}
                   title="Queue after the active run"
                 >
@@ -224,7 +224,7 @@ export function Composer({ tab }: { tab: Tab }) {
                 </button>
                 <button
                   type="button"
-                  className="rounded-md border border-[var(--error)] px-2 py-1 text-[11px] text-[var(--error)] hover:bg-[var(--error-soft)]"
+                  className="rounded-full border border-[var(--error)] px-2.5 py-1 text-[11px] text-[var(--error)] hover:bg-[var(--error-soft)]"
                   onClick={() => abortTab(tab.id)}
                 >
                   <Square size={11} className="mr-1 inline" />
@@ -235,7 +235,7 @@ export function Composer({ tab }: { tab: Tab }) {
               <button
                 type="button"
                 disabled={!text.trim() || disabled}
-                className="rounded-md bg-[var(--accent)] px-2.5 py-1 text-[11px] font-medium text-[var(--on-accent)] disabled:opacity-40"
+                className="rounded-full bg-[var(--accent)] px-3 py-1 text-[11px] font-medium text-[var(--on-accent)] transition-opacity hover:opacity-90 disabled:opacity-40"
                 onClick={() => submit()}
               >
                 <ArrowUp size={12} className="mr-1 inline" />

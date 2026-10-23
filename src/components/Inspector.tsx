@@ -10,7 +10,7 @@ export function Inspector() {
   const panels = usePlugins((state) => state.panels);
 
   return (
-    <aside className="hidden w-[300px] shrink-0 flex-col border-l border-[var(--border)] bg-[var(--bg)] min-[900px]:flex">
+    <aside className="hidden w-[300px] shrink-0 flex-col border-l border-[var(--border)] bg-[var(--surface)] min-[900px]:flex">
       <div className="border-b border-[var(--border)] px-3 py-2 text-[11px] font-medium text-[var(--muted)]">
         Inspector
       </div>

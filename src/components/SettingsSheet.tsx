@@ -12,7 +12,7 @@ import { openExternal } from "../lib/tauri";
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-4 py-1.5">
+    <div className="flex items-center justify-between gap-4 py-2">
       <div className="text-[12px] text-[var(--muted)]">{label}</div>
       <div className="min-w-0">{children}</div>
     </div>
@@ -22,10 +22,10 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-5">
-      <h3 className="mb-1 text-[10px] font-medium uppercase tracking-wide text-[var(--muted)]">
+      <h3 className="mb-1.5 px-1 text-[10px] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
         {title}
       </h3>
-      <div className="rounded-lg border border-[var(--border)] px-3 py-1">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg)]/50 px-4 py-1.5">
         {children}
       </div>
     </section>
@@ -33,7 +33,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 const selectClass =
-  "rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-[11px] outline-none";
+  "rounded-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[11px] outline-none transition-colors hover:border-[var(--border-strong)]";
 
 export function SettingsSheet() {
   const close = useUi((state) => state.closeSettings);
@@ -58,20 +58,20 @@ export function SettingsSheet() {
   }, [close]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 p-6">
-      <div className="w-full max-w-[640px] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-pop)]">
-        <div className="flex items-center gap-2 border-b border-[var(--border)] px-4 py-3">
-          <div className="text-[13px] font-medium">Settings</div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-6 backdrop-blur-[2px]">
+      <div className="w-full max-w-[640px] overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-pop)]">
+        <div className="flex items-center gap-2 border-b border-[var(--border)] px-5 py-3.5">
+          <div className="text-[13px] font-semibold tracking-[-0.01em]">Settings</div>
           <button
             type="button"
-            className="ml-auto rounded p-1 text-[var(--muted)] hover:bg-[var(--surface-2)]"
+            className="ml-auto rounded-full p-1.5 text-[var(--muted)] transition-colors hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"
             onClick={close}
           >
             <X size={14} />
           </button>
         </div>
 
-        <div className="max-h-[68vh] overflow-y-auto px-4 py-4">
+        <div className="max-h-[68vh] overflow-y-auto px-5 py-4">
           <Section title="General">
             <Row label="Default backend">
               <select

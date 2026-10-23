@@ -36,7 +36,7 @@ function EntryView({ entry }: { entry: TranscriptEntry }) {
   if (entry.kind === "user") {
     return (
       <div className="flex justify-end">
-        <div className="max-w-[85%] rounded-2xl bg-[var(--surface-2)] px-4 py-2.5 text-[13px] leading-6">
+        <div className="max-w-[85%] rounded-[20px] rounded-br-md bg-[var(--surface-2)] px-4 py-2.5 text-[13px] leading-6">
           {entry.text}
         </div>
       </div>

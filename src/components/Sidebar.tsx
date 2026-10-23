@@ -50,15 +50,15 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="flex w-[260px] shrink-0 flex-col border-r border-[var(--border)] bg-[var(--bg)] max-[900px]:w-[220px]">
+    <aside className="flex w-[260px] shrink-0 flex-col border-r border-[var(--border)] bg-[var(--surface)] max-[900px]:w-[220px]">
       <div className="flex items-center gap-2 px-4 pb-2 pt-3">
-        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[var(--fg)] text-[11px] font-semibold text-[var(--bg)]">
+        <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-[var(--fg)] text-[12px] font-semibold text-[var(--bg)]">
           π
         </div>
         <div className="text-[13px] font-semibold">Pi Desktop</div>
         <button
           type="button"
-          className="ml-auto rounded p-1 text-[var(--muted)] hover:bg-[var(--surface-2)]"
+          className="ml-auto rounded-full p-1.5 text-[var(--muted)] transition-colors hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"
           onClick={() => void openWorkspace()}
           title="Open workspace"
         >
@@ -95,14 +95,14 @@ export function Sidebar() {
               </select>
               <button
                 type="button"
-                className="flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 text-[11px] hover:bg-[var(--surface-2)]"
+                className="flex items-center gap-1 rounded-full border border-[var(--border)] px-2.5 py-1 text-[11px] transition-colors hover:bg-[var(--surface-2)]"
                 onClick={() => void newSession(tab.id)}
               >
                 <Plus size={11} /> New
               </button>
               <button
                 type="button"
-                className="flex items-center gap-1 rounded-md border border-[var(--border)] px-2 py-1 text-[11px] hover:bg-[var(--surface-2)]"
+                className="flex items-center gap-1 rounded-full border border-[var(--border)] px-2 py-1 text-[11px] transition-colors hover:bg-[var(--surface-2)]"
                 onClick={() => void forkTab(tab.id)}
                 title="Fork at the latest user message"
               >
@@ -128,7 +128,7 @@ export function Sidebar() {
                       key={session.path}
                       type="button"
                       onClick={() => void resumeSession(tab.id, session.path)}
-                      className={`mb-0.5 flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-left text-[11px] ${
+                      className={`mb-0.5 flex w-full items-start gap-2 rounded-xl px-2.5 py-2 text-left text-[11px] transition-colors ${
                         active
                           ? "bg-[var(--accent-soft)] text-[var(--fg)]"
                           : "text-[var(--muted)] hover:bg-[var(--surface-2)]"
@@ -151,12 +151,12 @@ export function Sidebar() {
           </div>
 
           {tab.error ? (
-            <div className="mx-3 mb-2 rounded-lg border border-[var(--error)]/40 bg-[var(--error-soft)] p-2 text-[11px] text-[var(--error)]">
+            <div className="mx-3 mb-2 rounded-xl border border-[var(--error)]/40 bg-[var(--error-soft)] p-2.5 text-[11px] text-[var(--error)]">
               <div className="mb-1 font-medium">Session error</div>
               <div className="break-words">{tab.error}</div>
               <button
                 type="button"
-                className="mt-2 flex items-center gap-1 rounded border border-[var(--error)]/40 px-1.5 py-0.5"
+                className="mt-2 flex items-center gap-1 rounded-full border border-[var(--error)]/40 px-2 py-0.5"
                 onClick={() => void restartTab(tab.id, { sessionFile: tab.sessionFile })}
               >
                 <RefreshCw size={10} /> Retry
@@ -170,17 +170,17 @@ export function Sidebar() {
         </div>
       )}
 
-      <div className="flex items-center gap-1 border-t border-[var(--border)] px-2 py-2">
+      <div className="mt-auto flex items-center gap-1 border-t border-[var(--border)] p-2">
         <button
           type="button"
-          className="flex flex-1 items-center gap-1.5 rounded-md px-2 py-1.5 text-[11px] text-[var(--muted)] hover:bg-[var(--surface-2)]"
+          className="flex flex-1 items-center gap-1.5 rounded-xl px-2 py-1.5 text-[11px] text-[var(--muted)] transition-colors hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"
           onClick={openPlugins}
         >
           <Puzzle size={13} /> Plugins
         </button>
         <button
           type="button"
-          className="flex flex-1 items-center gap-1.5 rounded-md px-2 py-1.5 text-[11px] text-[var(--muted)] hover:bg-[var(--surface-2)]"
+          className="flex flex-1 items-center gap-1.5 rounded-xl px-2 py-1.5 text-[11px] text-[var(--muted)] transition-colors hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"
           onClick={openSettings}
         >
           <Settings size={13} /> Settings

@@ -1,14 +1,43 @@
 import {
   Activity,
+  Monitor,
+  Moon,
   PanelLeft,
   PanelRight,
   Settings,
   ShieldCheck,
+  Sun,
 } from "lucide-react";
 import type { ApprovalMode, ThinkingLevel } from "@pi-desktop/protocol";
 import { useTabs } from "../state/tabs";
 import { useUi } from "../state/ui";
 import { setApprovalMode, setModel, setThinking } from "../lib/host";
+import { useSettings } from "../state/settings";
+import { appearanceLabel, nextAppearance } from "../state/appearance";
+
+function AppearanceButton() {
+  const theme = useSettings((state) => state.settings.theme);
+  const update = useSettings((state) => state.update);
+  const current = appearanceLabel(theme);
+  const next = nextAppearance(theme);
+  const Icon = current === "light" ? Sun : current === "dark" ? Moon : Monitor;
+  const label =
+    current === "custom"
+      ? `Theme: ${theme} (click for system)`
+      : `Theme: ${current} (click for ${next})`;
+
+  return (
+    <button
+      type="button"
+      className="rounded-full p-1 hover:bg-[var(--surface-2)]"
+      title={label}
+      aria-label={label}
+      onClick={() => update({ theme: next })}
+    >
+      <Icon size={13} />
+    </button>
+  );
+}
 
 const APPROVAL_LABELS: Record<ApprovalMode, string> = {
   "follow-cli": "Follow CLI",
@@ -39,10 +68,10 @@ export function StatusBar() {
   const effective = snapshot?.effectiveApproval;
 
   return (
-    <div className="flex h-8 shrink-0 items-center gap-2 border-t border-[var(--border)] bg-[var(--bg)] px-2 text-[10px] text-[var(--muted)]">
+    <div className="flex h-9 shrink-0 items-center gap-1.5 border-t border-[var(--border)] bg-[var(--bg)] px-3 text-[10px] text-[var(--muted)]">
       <button
         type="button"
-        className="rounded p-1 hover:bg-[var(--surface-2)]"
+        className="rounded-full p-1 hover:bg-[var(--surface-2)]"
         onClick={toggleSidebar}
         title="Toggle sidebar"
       >
@@ -51,7 +80,7 @@ export function StatusBar() {
 
       {tab ? (
         <>
-          <div className="flex items-center gap-1 rounded border border-[var(--border)] px-1.5 py-0.5">
+          <div className="flex items-center gap-1 rounded-full border border-[var(--border)] px-2 py-0.5">
             <ShieldCheck size={11} />
             <select
               value={tab.approvalMode}
@@ -128,9 +157,10 @@ export function StatusBar() {
           </span>
         ) : null}
         {tab ? <span>{tab.status}</span> : null}
+        <AppearanceButton />
         <button
           type="button"
-          className="rounded p-1 hover:bg-[var(--surface-2)]"
+          className="rounded-full p-1 hover:bg-[var(--surface-2)]"
           onClick={toggleInspector}
           title="Toggle inspector"
         >
@@ -138,7 +168,7 @@ export function StatusBar() {
         </button>
         <button
           type="button"
-          className="rounded p-1 hover:bg-[var(--surface-2)]"
+          className="rounded-full p-1 hover:bg-[var(--surface-2)]"
           onClick={openSettings}
           title="Settings"
         >

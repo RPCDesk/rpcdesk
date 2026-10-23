@@ -1,15 +1,33 @@
 @import "tailwindcss";
 
+/*
+ * Radius and elevation scale. Tailwind utilities (`rounded-md`, `rounded-xl`,
+ * `shadow-md`, ...) resolve against these, so the whole surface stays in one
+ * rhythm instead of per-component pixel values.
+ */
+@theme {
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 28px;
+  --shadow-sm: 0 1px 2px rgba(16, 22, 34, 0.06);
+  --shadow-md: 0 6px 20px rgba(16, 22, 34, 0.08);
+  --shadow-lg: 0 18px 50px rgba(16, 22, 34, 0.14);
+}
+
 :root {
   color-scheme: light dark;
-  --bg: #f7f7f8;
+  --bg: #f3f4f7;
   --surface: #ffffff;
-  --surface-2: #f2f2f4;
-  --surface-3: #e9e9ec;
-  --fg: #1d1d1f;
-  --muted: #6e6e73;
-  --border: rgba(0, 0, 0, 0.1);
-  --border-strong: rgba(0, 0, 0, 0.18);
+  --surface-2: #eaedf2;
+  --surface-3: #dfe4ec;
+  --fg: #16181d;
+  --muted: #5f6773;
+  --border: rgba(16, 24, 38, 0.09);
+  --border-strong: rgba(16, 24, 38, 0.17);
   --accent: #0a6fd6;
   --accent-soft: rgba(10, 111, 214, 0.12);
   --on-accent: #ffffff;
@@ -19,22 +37,24 @@
   --warning-soft: rgba(178, 80, 0, 0.12);
   --error: #d70015;
   --error-soft: rgba(215, 0, 21, 0.1);
-  --radius: 10px;
+  --radius: 12px;
   --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
-  --shadow-pop: 0 10px 40px rgba(0, 0, 0, 0.16);
+  --shadow-pop: 0 20px 56px rgba(15, 23, 42, 0.16);
+  --shadow-card: 0 6px 20px rgba(15, 23, 42, 0.06);
+  --ring: 0 0 0 3px var(--accent-soft);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1c1c1e;
-    --surface: #242426;
-    --surface-2: #2c2c2e;
-    --surface-3: #363638;
-    --fg: #f5f5f7;
-    --muted: #a1a1a6;
-    --border: rgba(255, 255, 255, 0.1);
-    --border-strong: rgba(255, 255, 255, 0.18);
+    --bg: #131418;
+    --surface: #191b20;
+    --surface-2: #202329;
+    --surface-3: #282c34;
+    --fg: #f3f4f8;
+    --muted: #a3aab5;
+    --border: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.17);
     --accent: #0a84ff;
     --accent-soft: rgba(10, 132, 255, 0.2);
     --on-accent: #06121f;
@@ -44,7 +64,12 @@
     --warning-soft: rgba(255, 159, 10, 0.14);
     --error: #ff453a;
     --error-soft: rgba(255, 69, 58, 0.14);
-    --shadow-pop: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --shadow-pop: 0 20px 56px rgba(0, 0, 0, 0.6);
+    --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.35);
+    /* Same variables @theme declared, darker for elevated dark surfaces. */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 56px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -59,18 +84,27 @@ body {
   margin: 0;
   font-family: var(--font-ui);
   font-size: 13px;
+  letter-spacing: -0.005em;
   background: var(--bg);
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow: hidden;
 }
 
-* {
-  box-sizing: border-box;
+/* One consistent focus treatment: no double rings, no browser default glow. */
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
 }
 
 ::selection {
   background: var(--accent-soft);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Keep these in the base layer: unlayered rules outrank Tailwind utilities, which
@@ -89,14 +123,19 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--border-strong);
   border-radius: 999px;
-  border: 3px solid transparent;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--accent) 40%, var(--border-strong));
   background-clip: padding-box;
 }
 
@@ -119,8 +158,8 @@ body {
 
 .prose-agent pre {
   margin: 0.7em 0;
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
   background: var(--surface-2);
   overflow-x: auto;
   font-family: var(--font-mono);
@@ -134,8 +173,8 @@ body {
 
 .prose-agent :not(pre) > code {
   background: var(--surface-2);
-  border-radius: 4px;
-  padding: 1px 4px;
+  border-radius: var(--radius-xs);
+  padding: 1px 5px;
 }
 
 .prose-agent ul,

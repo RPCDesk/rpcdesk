@@ -26,6 +26,7 @@ export function Welcome() {
 
   return (
     <div className="flex h-full flex-col items-center justify-center px-8">
+      <div className="flex w-full max-w-[420px] flex-col items-center rounded-[28px] border border-[var(--border)] bg-[var(--surface)] px-8 py-9 shadow-[var(--shadow-card)]">
       <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--fg)] text-2xl font-semibold text-[var(--bg)]">
         π
       </div>
@@ -55,7 +56,7 @@ export function Welcome() {
       <button
         type="button"
         onClick={() => void open()}
-        className="mt-4 flex items-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-[12px] font-medium text-[var(--on-accent)]"
+        className="mt-4 flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-[12px] font-medium text-[var(--on-accent)] shadow-[var(--shadow-sm)] transition-opacity hover:opacity-90"
       >
         <FolderOpen size={14} />
         Open a workspace
@@ -90,7 +91,7 @@ export function Welcome() {
         </div>
       ) : null}
 
-      <div className="mt-8 flex items-center gap-4 text-[10px] text-[var(--muted)]">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-[var(--muted)]">
         <span className="flex items-center gap-1">
           <ShieldCheck size={11} /> Local credentials
         </span>
@@ -98,6 +99,7 @@ export function Welcome() {
           <Sparkles size={11} /> TS plugins
         </span>
         {!isTauri ? <span>Browser preview — open with Tauri</span> : null}
+      </div>
       </div>
     </div>
   );
