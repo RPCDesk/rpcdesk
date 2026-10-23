@@ -139,7 +139,7 @@ export function PluginManager() {
           </button>
           <button
             type="button"
-            className="ml-auto rounded-md bg-[var(--accent)] px-3 py-1.5 text-[11px] font-medium text-white"
+            className="ml-auto rounded-md bg-[var(--accent)] px-3 py-1.5 text-[11px] font-medium text-[var(--on-accent)]"
             onClick={close}
           >
             Done

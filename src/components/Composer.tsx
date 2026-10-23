@@ -235,7 +235,7 @@ export function Composer({ tab }: { tab: Tab }) {
               <button
                 type="button"
                 disabled={!text.trim() || disabled}
-                className="rounded-md bg-[var(--accent)] px-2.5 py-1 text-[11px] font-medium text-white disabled:opacity-40"
+                className="rounded-md bg-[var(--accent)] px-2.5 py-1 text-[11px] font-medium text-[var(--on-accent)] disabled:opacity-40"
                 onClick={() => submit()}
               >
                 <ArrowUp size={12} className="mr-1 inline" />

@@ -88,6 +88,26 @@ The GitHub Actions matrix in `.github/workflows/build.yml` builds macOS arm64/x6
 
 Local verification so far: macOS arm64 (`app` + `dmg`), Debian 13 arm64 (`deb`, `rpm`, `AppImage`), and Windows 11 arm64 (NSIS) — see `docs/vms.md`.
 
+## Themes
+
+Settings → Appearance offers swatch previews for the built-in palette:
+
+| Theme | Look |
+| --- | --- |
+| System | Follows the OS light/dark preference |
+| Light / Dark | The original neutral macOS palette |
+| Graphite | Near-black with a violet accent |
+| Midnight | Deep navy with a sky-blue accent |
+| Aurora | Ink blue with a periwinkle accent |
+| Sand | Warm paper with a terracotta accent |
+| Mist | Cool gray with a teal accent |
+
+Themes are plain token maps (`src/themes.ts`), so a theme can be validated by the same
+contrast rules the built-ins follow (text ≥ 7:1 on background, muted text ≥ 4.5:1, accents
+≥ 3:1, and labels ≥ 4.5:1 against their accent). Selecting a theme also sets `color-scheme`, so
+native scrollbars, selects, and checkboxes match it. User theme packs in
+`~/.pi-desktop/themes/` appear in the same picker.
+
 ## Configuration
 
 | Path | Purpose |

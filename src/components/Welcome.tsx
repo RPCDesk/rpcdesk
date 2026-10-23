@@ -55,7 +55,7 @@ export function Welcome() {
       <button
         type="button"
         onClick={() => void open()}
-        className="mt-4 flex items-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-[12px] font-medium text-white"
+        className="mt-4 flex items-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-[12px] font-medium text-[var(--on-accent)]"
       >
         <FolderOpen size={14} />
         Open a workspace

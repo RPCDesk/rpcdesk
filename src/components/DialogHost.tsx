@@ -112,7 +112,7 @@ export function DialogHost() {
               <button
                 type="button"
                 autoFocus
-                className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-white"
+                className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--on-accent)]"
                 onClick={() => respond({ confirmed: true })}
               >
                 Allow
@@ -142,7 +142,7 @@ export function DialogHost() {
                 </button>
                 <button
                   type="button"
-                  className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-white"
+                  className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--on-accent)]"
                   onClick={() => respond({ value })}
                 >
                   Submit
@@ -170,7 +170,7 @@ export function DialogHost() {
                 </button>
                 <button
                   type="button"
-                  className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-white"
+                  className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--on-accent)]"
                   onClick={() => respond({ value })}
                 >
                   Save
@@ -254,7 +254,7 @@ export function DialogHost() {
                 <button
                   type="button"
                   autoFocus
-                  className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-white"
+                  className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--on-accent)]"
                   onClick={() => respond({ answer: "once" })}
                 >
                   Allow once

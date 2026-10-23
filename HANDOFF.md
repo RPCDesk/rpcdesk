@@ -43,6 +43,7 @@ Version `0.1.0` in `package.json` and `src-tauri/tauri.conf.json` (they must sta
 - Linux arm64 (Debian 13 VM): `.deb`, `.rpm`, `.AppImage`; AppImage launched, managed `omp-linux-arm64` downloaded and SHA-256 verified.
 - Windows x64 (Windows 11 arm64 VM): NSIS installer, app UI, `bun.bin` extraction, managed `omp.exe`, session whose stderr is surfaced in the error panel.
 - Self-update: macOS `.app` replaced itself 0.1.0 → 0.2.0 and relaunched; Linux AppImage replaced in place (hash-verified); Windows NSIS install upgraded 0.1.0 → 0.2.0 in place.
+- Themes: eight built-ins (System, Light, Dark, Graphite, Midnight, Aurora, Sand, Mist) plus user packs, selectable as swatches; every palette is contrast-checked and switching persists, verified in the running macOS app.
 - Checks: `bun run typecheck`, 58 Vitest tests, 9 Rust tests (3 network tests are `#[ignore]`).
 
 **Not yet done / open:**
@@ -104,6 +105,8 @@ clears stale Tauri resource copies that otherwise leak into bundles.
 - The Bun runtime ships gzipped as `sidecar/bun.bin` and is inflated into the app-support `bin/` folder on first launch. Keep the payload compressed; a raw binary breaks the AppImage bundler.
 - Platform directories come from `src-tauri/src/paths.rs` — no ad-hoc `$HOME` concatenation.
 - Plugins are user-level only (`~/.pi-desktop/plugins`), never project-level.
+- Theme palettes in `src/themes.ts` must satisfy the invariants in `src/themes.test.ts` (all tokens present, dark surfaces lighten as they stack, light insets darken, contrast floors, label colour on accent via `--on-accent`). Never hard-code `text-white` on an accent surface.
+- Base element styles in `src/styles/tokens.css` live inside `@layer base`; unlayered rules there outrank Tailwind utilities and silently drop classes like `text-[var(--muted)]` on buttons and inputs.
 - Vocabulary in `CONTEXT.md` is authoritative (harness, backend, sidecar, host, frame, runtime, session, tab, workspace, transcript).
 
 ## Maintenance rule

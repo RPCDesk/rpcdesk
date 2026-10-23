@@ -37,7 +37,7 @@ export function UpdateBanner() {
         <button
           type="button"
           disabled={downloading}
-          className="rounded-md bg-[var(--accent)] px-2.5 py-1 text-[11px] font-medium text-white disabled:opacity-60"
+          className="rounded-md bg-[var(--accent)] px-2.5 py-1 text-[11px] font-medium text-[var(--on-accent)] disabled:opacity-60"
           onClick={() => void install()}
         >
           {downloading ? "Installing…" : "Install and restart"}
@@ -115,7 +115,7 @@ export function UpdateSettings() {
             {status === "available" ? (
               <button
                 type="button"
-                className="rounded-md bg-[var(--accent)] px-2 py-1 text-[11px] font-medium text-white"
+                className="rounded-md bg-[var(--accent)] px-2 py-1 text-[11px] font-medium text-[var(--on-accent)]"
                 onClick={() => void install()}
               >
                 Install {info?.version}

@@ -4,6 +4,7 @@ import type { ApprovalMode, Backend } from "@pi-desktop/protocol";
 import { useSettings } from "../state/settings";
 import { useRuntime, formatBytes } from "../state/runtime";
 import { UpdateSettings } from "./UpdateBanner";
+import { ThemePicker } from "./ThemePicker";
 import { useThemes } from "../themes";
 import { useUi } from "../state/ui";
 import { useTabs } from "../state/tabs";
@@ -135,19 +136,11 @@ export function SettingsSheet() {
           </Section>
 
           <Section title="Appearance">
-            <Row label="Theme">
-              <select
-                value={settings.theme}
-                onChange={(event) => update({ theme: event.target.value })}
-                className={selectClass}
-              >
-                {themes.map((theme) => (
-                  <option key={theme.id} value={theme.id}>
-                    {theme.name}
-                  </option>
-                ))}
-              </select>
-            </Row>
+            <ThemePicker
+              value={settings.theme}
+              themes={themes}
+              onChange={(theme) => update({ theme })}
+            />
           </Section>
 
           <Section title="Updates">
@@ -272,7 +265,7 @@ export function SettingsSheet() {
         <div className="flex justify-end border-t border-[var(--border)] px-4 py-3">
           <button
             type="button"
-            className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[11px] font-medium text-white"
+            className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-[11px] font-medium text-[var(--on-accent)]"
             onClick={close}
           >
             Done

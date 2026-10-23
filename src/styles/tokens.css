@@ -10,8 +10,9 @@
   --muted: #6e6e73;
   --border: rgba(0, 0, 0, 0.1);
   --border-strong: rgba(0, 0, 0, 0.18);
-  --accent: #0a84ff;
-  --accent-soft: rgba(10, 132, 255, 0.12);
+  --accent: #0a6fd6;
+  --accent-soft: rgba(10, 111, 214, 0.12);
+  --on-accent: #ffffff;
   --success: #248a3d;
   --success-soft: rgba(36, 138, 61, 0.12);
   --warning: #b25000;
@@ -36,6 +37,7 @@
     --border-strong: rgba(255, 255, 255, 0.18);
     --accent: #0a84ff;
     --accent-soft: rgba(10, 132, 255, 0.2);
+    --on-accent: #06121f;
     --success: #30d158;
     --success-soft: rgba(48, 209, 88, 0.14);
     --warning: #ff9f0a;
@@ -71,15 +73,19 @@ body {
   background: var(--accent-soft);
 }
 
-button,
-input,
-textarea {
-  font: inherit;
-  color: inherit;
-}
+/* Keep these in the base layer: unlayered rules outrank Tailwind utilities, which
+   would silently drop text-color classes on buttons and inputs. */
+@layer base {
+  button,
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
 
-button {
-  cursor: pointer;
+  button {
+    cursor: pointer;
+  }
 }
 
 ::-webkit-scrollbar {
