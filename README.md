@@ -99,6 +99,7 @@ Settings → Appearance offers swatch previews for the built-in palette:
 | Graphite | Near-black with a violet accent |
 | Midnight | Deep navy with a sky-blue accent |
 | Aurora | Ink blue with a periwinkle accent |
+| Andromeda | Slate blue with a cyan accent |
 | Sand | Warm paper with a terracotta accent |
 | Mist | Cool gray with a teal accent |
 

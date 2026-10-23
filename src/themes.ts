@@ -149,6 +149,27 @@ const auroraTokens: Record<string, string> = {
   "--shadow-pop": "0 12px 44px rgba(4, 6, 16, 0.65)",
 };
 
+const andromedaTokens: Record<string, string> = {
+  "--bg": "#23262e",
+  "--surface": "#2a2e37",
+  "--surface-2": "#313640",
+  "--surface-3": "#3a4050",
+  "--fg": "#d5ced9",
+  "--muted": "#9aa0ad",
+  "--border": "rgba(213, 206, 217, 0.12)",
+  "--border-strong": "rgba(213, 206, 217, 0.22)",
+  "--accent": "#00e8c6",
+  "--accent-soft": "rgba(0, 232, 198, 0.16)",
+  "--on-accent": "#07231f",
+  "--success": "#96e072",
+  "--success-soft": "rgba(150, 224, 114, 0.14)",
+  "--warning": "#ffe66d",
+  "--warning-soft": "rgba(255, 230, 109, 0.14)",
+  "--error": "#f92672",
+  "--error-soft": "rgba(249, 38, 114, 0.16)",
+  "--shadow-pop": "0 12px 44px rgba(6, 8, 14, 0.7)",
+};
+
 const sandTokens: Record<string, string> = {
   "--bg": "#f6f1e8",
   "--surface": "#fffdf9",
@@ -232,6 +253,13 @@ export const BUILTIN_THEMES: ThemeDefinition[] = [
     name: "Aurora",
     appearance: "dark",
     tokens: auroraTokens,
+    source: "builtin",
+  },
+  {
+    id: "andromeda",
+    name: "Andromeda",
+    appearance: "dark",
+    tokens: andromedaTokens,
     source: "builtin",
   },
   {
