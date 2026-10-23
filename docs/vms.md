@@ -75,7 +75,7 @@ Notes for this guest:
 - Launch the built app in the interactive session with a scheduled task; `prlctl exec` runs in session 0 and cannot show a window:
 
 ```sh
-prlctl exec pi-windows --user pi --password pi cmd /c "schtasks /create /tn PiDesktop /tr \"%USERPROFILE%\rpcdesk\src-tauri\target\x86_64-pc-windows-msvc\release\rpcdesk.exe\" /sc once /st 23:59 /ru pi /it /f & schtasks /run /tn PiDesktop"
+prlctl exec pi-windows --user pi --password pi cmd /c "schtasks /create /tn RPCDesk /tr \"%USERPROFILE%\rpcdesk\src-tauri\target\x86_64-pc-windows-msvc\release\rpcdesk.exe\" /sc once /st 23:59 /ru pi /it /f & schtasks /run /tn RPCDesk"
 ```
 
 Verified in this VM: unit tests, release build, NSIS bundle, the app UI, `bun.bin` extraction to `%LOCALAPPDATA%\rpcdesk\bin`, managed runtime resolution, an omp session whose stderr is surfaced in the app, and a real in-place update (installed 0.1.0 → 0.2.0 via the NSIS updater; the update log shows the feed, the found version, and the install).

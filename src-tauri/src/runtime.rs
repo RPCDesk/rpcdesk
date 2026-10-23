@@ -377,7 +377,7 @@ async fn fetch_verified(
     mut progress: impl FnMut(u64, u64),
 ) -> Result<(), String> {
     let response = reqwest::Client::builder()
-        .user_agent("Pi-Desktop/0.1")
+        .user_agent("rpcdesk/0.1")
         .build()
         .map_err(|error| error.to_string())?
         .get(release.url)

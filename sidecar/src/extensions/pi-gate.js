@@ -38,7 +38,7 @@ function gateConfig() {
   }
 }
 
-export default function piDesktopGate(pi) {
+export default function rpcdeskGate(pi) {
   const grants = new Set();
 
   pi.on("tool_call", async (event, context) => {
