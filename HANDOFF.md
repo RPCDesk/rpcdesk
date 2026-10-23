@@ -3,7 +3,7 @@
 Working notes for whoever picks this up next (human or agent). Keep it current: it is the
 one file that should always describe the real state of the project.
 
-_Last updated: 2026-10-23 — after the rpcdesk rebrand, the design pass, and the Pages site._
+_Last updated: 2026-10-23 — after the rebrand, the Pages site, publishing to GitHub, and the first releases._
 
 ## What this is
 
@@ -49,11 +49,12 @@ Version `0.1.0` in `package.json` and `src-tauri/tauri.conf.json` (they must sta
 
 **Not yet done / open:**
 
-- Published at https://github.com/RPCDesk/rpcdesk (`main`, public). Homepage is the Pages site. CI secrets `TAURI_SIGNING_PRIVATE_KEY` / `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` are set, but the workflow has not been dispatched yet.
+- Published at https://github.com/RPCDesk/rpcdesk (`main`, public) with homepage set to the Pages site. CI secrets are configured and the matrix is green on all four targets.
+- Releases: `v0.1.0` then `v0.1.1` publish signed bundles plus `latest.json`; the app's default feed is `releases/latest/download/latest.json`. Self-update was proven against that feed: a 0.0.9 build found, downloaded, installed, and relaunched as 0.1.0.
 - Credit: the org login is canonically `RPCDesk` (GitHub preserves the capitalization chosen at creation); URLs are case-insensitive and the brand stays lowercase.
 - Before making the repo more prominent, decide what to do with the test-VM credentials written in `docs/vms.md`.
 - CI is green: run `39928522930` built macOS arm64/x64, Linux x64, and Windows x64 (artifacts per target). Two fixes were needed and are committed: build the web bundle before cargo (`generate_context!` embeds `../dist`), and install only the ayatana indicator on Ubuntu 22.04.
-- Release flow: push a `v*` tag; `tauri-action` uploads signed bundles plus `latest.json`, and the app's default updater endpoint points at `releases/latest/download/latest.json`.
+- Release flow: bump `package.json`, `src-tauri/tauri.conf.json`, and `src-tauri/Cargo.toml` together, commit, then `git tag -a vX.Y.Z -m ... && git push origin vX.Y.Z`. `tauri-action` creates the release, uploads signed bundles, and rewrites `latest.json`.
 - No Apple/Windows code signing or notarization. Updates are verified with the updater key only.
 - Linux `.deb`/`.rpm` installs cannot self-update (updater limitation) — they need a package repository.
 - Plugin UI runs unsandboxed in the main webview (CSP allows `eval` for transpiled plugin UI). A worker/iframe sandbox is unbuilt.
